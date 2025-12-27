@@ -95,6 +95,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
         className={`absolute ${backgroundColor} rounded-[20px] md:rounded-[32px] p-6 md:p-8 shadow-xl w-full h-full`}
         style={{
           willChange: 'transform',
+          transformStyle: 'preserve-3d',
         }}
       >
         <div className="h-full flex flex-col">
@@ -198,7 +199,7 @@ export function PortfolioSection() {
     // Calculate active position (centered in viewport)
     const activeY = (viewportHeight - cardContainerHeight) / 2;
 
-    // Set initial positions (peek state)
+    // Set initial positions (peek state) with no rotation
     console.log("set initial positions");
     cards.forEach((card, index) => {
       const initialY = peekHeight * index;
@@ -207,6 +208,8 @@ export function PortfolioSection() {
       gsap.set(card, {
         y: initialY,
         zIndex: zIndex, // Higher cards have lower z-index initially
+        rotateY: 0,
+        rotateZ: 0,
       });
     });
 
@@ -218,34 +221,60 @@ export function PortfolioSection() {
 
     cards.forEach((card, index) => {
       const startProgress = index * progressPerCard;
-      const midProgress = startProgress + (progressPerCard * 0.5);
+      
+      // Split each card's progress into 3 phases:
+      // 1. Rotation phase (30% of card's progress)
+      // 2. Translation to active phase (35% of card's progress)
+      // 3. Translation to archived phase (35% of card's progress)
+      const rotationDuration = progressPerCard * 0.3;
+      const toActiveDuration = progressPerCard * 0.35;
+      const toArchivedDuration = progressPerCard * 0.35;
+      
+      const rotationEndProgress = startProgress + rotationDuration;
+      const activeEndProgress = rotationEndProgress + toActiveDuration;
 
-      // Move from peek → active (centered)
+      // Define rotation angles (alternate for visual variety)
+      const rotateYAngle = index % 2 === 0 ? -12 : 12;
+      const rotateZAngle = index % 2 === 0 ? 6 : -6;
+
+      // Phase 1: Rotate (Y and Z in parallel) - card stays at peek position
+      timeline.to(
+        card,
+        {
+          rotateY: rotateYAngle,
+          rotateZ: rotateZAngle,
+          duration: rotationDuration,
+          ease: 'power2.out',
+        },
+        startProgress
+      );
+
+      // Phase 2: Move from peek → active (centered) while maintaining rotation
       timeline.to(
         card,
         {
           y: activeY,
           zIndex: 100, // Active card on top
-          duration: progressPerCard * 0.5,
+          duration: toActiveDuration,
           ease: 'power2.inOut',
         },
-        startProgress
+        rotationEndProgress
       );
 
-      // Move from active → archived (10% at top)      
+      // Phase 3: Move from active → archived (at top) while maintaining rotation
       const newPeekHeight = cards[index].offsetHeight * 0.01;
       const newHiddenHeight = cards[index].offsetHeight * 1.35;
       const archivedY = -newHiddenHeight + (newPeekHeight * index);
-      console.log("card " + index + " startProgress: " + startProgress + ", midProgress: " + midProgress + ", archivedY: " + archivedY + ", zIndex: " + (100 + index));
+      console.log("card " + index + " startProgress: " + startProgress + ", rotationEndProgress: " + rotationEndProgress + ", activeEndProgress: " + activeEndProgress + ", archivedY: " + archivedY);
       timeline.to(
         card,
         {
           y: archivedY,
           zIndex: 50 + index, // Archived cards stack in order
-          duration: progressPerCard * 0.5,
+          duration: toArchivedDuration,
           ease: 'power2.inOut',
         },
-        midProgress
+        activeEndProgress
       );
     });
 
@@ -313,7 +342,10 @@ export function PortfolioSection() {
         <div
           ref={cardContainerRef}
           className="relative w-[95vw] md:w-[90vw] h-[60vh] max-w-[900px]"
-          style={{ marginTop: 'clamp(8rem, 15vh, 12rem)' }}
+          style={{ 
+            marginTop: 'clamp(8rem, 15vh, 12rem)',
+            perspective: '1200px',
+          }}
         >
         {projects.map((project, index) => (
             <PortfolioCard
