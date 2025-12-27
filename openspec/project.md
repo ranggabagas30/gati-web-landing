@@ -38,6 +38,9 @@ GATI Website Landing Page is a modern, responsive marketing website showcasing G
   - Theme configuration in `src/styles/theme.css`
 - **State Management**: Local component state using React hooks (useState, useEffect, useRef)
 - **Animation Strategy**: GSAP with ScrollTrigger for scroll-based animations
+  - Portfolio section uses advanced scroll-triggered card stacking animation
+  - Cards animate from peek state → active (centered) → archived (above viewport)
+  - Uses GSAP timeline with ScrollTrigger pinning for smooth scroll-linked animations
 - **Responsive Design**: Mobile-first approach with Tailwind breakpoints (md:, lg:)
 
 ### Testing Strategy
@@ -60,13 +63,14 @@ Git workflow conventions to be established. Consider standard practices like:
   - Company manifesto and values
   - Services offered
   - Team members
-  - Portfolio/work examples
+  - Portfolio/work examples (stacking card animation with scroll-triggered reveal)
   - Areas of expertise
   - Pricing information
 - Brand colors include:
   - Primary accent: `#f05123` (orange)
   - Text: `#0f0f0f` (dark)
   - Background: White with transparency effects
+  - Portfolio cards alternate between white and orange backgrounds (even index: white, odd index: orange)
 
 ## Important Constraints
 - **Figma Integration**: Project uses Figma asset imports, requiring Figma plugin/configuration
