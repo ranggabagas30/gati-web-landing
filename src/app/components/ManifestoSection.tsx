@@ -106,25 +106,22 @@ export function ManifestoSection() {
     <div id="about" className="relative h-[500vh] bg-black" ref={outerContainerRef}>
       <div
         ref={innerContainerRef}
-        className="flex items-center justify-center min-h-screen px-6"
+        className="flex items-center justify-center min-h-screen px-4 md:px-6 xl:px-8 2xl:px-[120px]"
       >
         <div className="max-w-[800px] mx-auto grid">
           {manifestoTexts.map((text, index) => {
             if (index === 0) {
-              // Special styling for first manifesto text
+              // Special styling for first manifesto text with responsive font sizes
               return (
                 <p
                   key={index}
                   ref={(el) => {
                     textRefs.current[index] = el;
                   }}
-                  className="col-start-1 row-start-1 text-[#C5C9C3] text-center leading-relaxed"
+                  className="col-start-1 row-start-1 text-[#C5C9C3] text-center font-normal text-2xl md:text-4xl xl:text-5xl 2xl:text-6xl leading-tight md:leading-normal xl:leading-relaxed 2xl:leading-[1.2]"
                   style={{ 
                     opacity: index === 0 ? 1 : 0,
                     fontFamily: 'Inter, sans-serif',
-                    fontSize: '76px',
-                    fontWeight: 400,
-                    lineHeight: '92px',
                   }}
                 >
                   At{' '}
@@ -135,7 +132,7 @@ export function ManifestoSection() {
                   <span style={{ color: '#f05123', fontWeight: 700 }}>Art</span>
                   , we cultivate progress
                   <br />
-                  <span style={{ fontSize: '24px', fontWeight: 400 }}>
+                  <span className="text-xs md:text-base xl:text-lg 2xl:text-xl font-normal">
                     —where technology is crafted with care.
                   </span>
                 </p>

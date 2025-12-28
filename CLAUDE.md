@@ -99,9 +99,15 @@ src/
 - No global state management library currently configured
 
 ### Responsive Design
-- All sections must be responsive (mobile, tablet, desktop)
-- Test breakpoints: mobile (<768px), tablet (768px-1024px), desktop (>1024px)
-- Use Tailwind responsive prefixes: `sm:`, `md:`, `lg:`, `xl:`
+- **Primary Resolution Target:** 1920x1080px (desktop standard)
+- **Breakpoints:**
+  - **1440px wide screens:** Adaptive container padding + relaxed spacing
+  - **1280x1024px:** Tighten vertical spacing, allow vertical scroll
+  - **768px (tablet):** Fully stacked layout, sticky CTAs
+  - **390px (mobile):** Fully stacked layout, sticky CTAs
+- All sections must be responsive across all breakpoints
+- Use Tailwind responsive prefixes: `sm:`, `md:`, `lg:`, `xl:`, `2xl:`
+- Test all breakpoints: 390px (mobile), 768px (tablet), 1280px, 1440px, 1920px (primary)
 
 ### Brand Guidelines
 - Primary accent color: `#f05123` (orange)

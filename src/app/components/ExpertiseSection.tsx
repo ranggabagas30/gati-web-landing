@@ -55,7 +55,7 @@ export function ExpertiseSection() {
 
   return (
     <section id="expertise" className="bg-white py-20 lg:py-40">
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-[120px]">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
         <div ref={titleRef} className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl lg:text-5xl">Available for New Opportunities</h2>
         </div>

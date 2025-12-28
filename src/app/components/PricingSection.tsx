@@ -71,7 +71,7 @@ export function PricingSection() {
 
   return (
     <section className="bg-white py-20 lg:py-40">
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-[120px]">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
         <div ref={containerRef} className="mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl mb-6">Transparent pricing for real-world teams</h2>
           <p className="text-lg text-[#6b6b6b] max-w-[800px]">

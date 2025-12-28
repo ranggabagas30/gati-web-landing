@@ -55,7 +55,7 @@ export function Header() {
         isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
       } ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}
     >
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-[120px]">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -84,7 +84,7 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 -mr-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -100,7 +100,7 @@ export function Header() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200">
-          <nav className="flex flex-col py-4 px-6">
+          <nav className="flex flex-col py-4 px-4 md:px-6">
             {menuItems.map((item) => (
               <a
                 key={item.label}

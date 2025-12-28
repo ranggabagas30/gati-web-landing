@@ -39,7 +39,7 @@ export function Footer() {
 
   return (
     <footer id="contact" className="bg-[#f05123] text-white py-20 lg:py-32">
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-[120px]">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
         <div ref={ctaRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl mb-6">Let's make progress, responsibly.</h2>
           <p className="text-xl md:text-2xl mb-8 opacity-90">

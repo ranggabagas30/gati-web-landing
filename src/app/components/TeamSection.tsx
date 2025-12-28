@@ -51,7 +51,7 @@ export function TeamSection() {
 
   return (
     <section className="bg-white py-20 lg:py-40">
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-[120px]">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
           {teamMembers.map((member, index) => (
             <div
