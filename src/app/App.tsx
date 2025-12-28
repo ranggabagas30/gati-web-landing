@@ -16,8 +16,8 @@ export default function App() {
       <ServicesSection />
       <TeamSection />
       <PortfolioSection />
-      <ExpertiseSection />
-      <ServicesListSection />
+      {/*<ExpertiseSection />*/}
+      {/*<ServicesListSection />*/}
       <PricingSection />
       <Footer />
     </div>
