@@ -326,7 +326,7 @@ export function PortfolioSection() {
     <section
       id="work"
       ref={sectionRef}
-      className="relative h-[700vh] bg-[#f9f9f9]"
+      className="relative h-[670vh] bg-[#f9f9f9]"
     >
       <div
         ref={pinnedContainerRef}
