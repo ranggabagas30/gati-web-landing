@@ -56,17 +56,7 @@ export function Header() {
       } ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}
     >
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <img
-              src="/images/logo/gati_logo_transparent.svg"
-              alt="GATI"
-              className="h-8 w-auto"
-              style={{ filter: isScrolled ? 'none' : 'brightness(0) invert(1)' }}
-            />
-          </div>
-
+        <div className="flex items-center justify-center h-20">
           {/* Desktop Menu */}
           <nav className="hidden md:flex items-center space-x-8">
             {menuItems.map((item) => (

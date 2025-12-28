@@ -130,10 +130,12 @@ export function ManifestoSection() {
                   <span style={{ color: '#f05123', fontWeight: 700 }}>Engineering</span>
                   {' & '}
                   <span style={{ color: '#f05123', fontWeight: 700 }}>Art</span>
-                  , we cultivate progress
+                  , 
+                  <br />
+                    we cultivate progress
                   <br />
                   <span className="text-xs md:text-base xl:text-lg 2xl:text-xl font-normal">
-                    —where technology is crafted with care.
+                    —Where technology is crafted with care.
                   </span>
                 </p>
               );
