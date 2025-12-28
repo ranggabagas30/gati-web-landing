@@ -44,8 +44,8 @@ export function Header() {
   const menuItems = [
     { label: 'About us', href: '#about' },
     { label: 'Work', href: '#work' },
-    { label: 'Expertise', href: '#expertise' },
-    { label: 'Product & Services', href: '#services' },
+    //{ label: 'Expertise', href: '#expertise' },
+    //{ label: 'Product & Services', href: '#services' },
     { label: 'Contact us', href: '#contact' },
   ];
 
@@ -54,9 +54,10 @@ export function Header() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
       } ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}
-    >
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
+    >      
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">        
         <div className="flex items-center justify-center h-20">
+          <img src="/images/logo/gati_logo_transparent.svg" alt="GATI" className="h-6 w-auto mr-8" />
           {/* Desktop Menu */}
           <nav className="hidden md:flex items-center space-x-8">
             {menuItems.map((item) => (
