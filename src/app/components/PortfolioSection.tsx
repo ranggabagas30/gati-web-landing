@@ -334,7 +334,7 @@ export function PortfolioSection() {
       >
         <div
           ref={titleRef}
-          className="absolute top-12 md:top-16 lg:top-20 left-0 right-0 text-center px-6 z-40"
+          className="absolute top-12 md:top-16 lg:top-20 left-0 right-0 text-center px-4 md:px-6 lg:px-[120px] z-40"
         >
         <h2 className="text-3xl md:text-4xl lg:text-5xl">Selected Works</h2>
       </div>
