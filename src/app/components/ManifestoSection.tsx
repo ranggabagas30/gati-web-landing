@@ -208,7 +208,7 @@ export function ManifestoSection() {
                 className="col-start-1 row-start-1 text-white text-center text-3xl md:text-4xl lg:text-5xl leading-relaxed md:leading-relaxed lg:leading-[1.3]"
                 style={{ opacity: index === 0 ? 1 : 0 }}
               >
-                {text}
+                {/* {text} */}
               </p>
             );
           })}
