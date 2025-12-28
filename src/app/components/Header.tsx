@@ -20,16 +20,19 @@ export function Header() {
 
       // Handle header visibility based on scroll direction
       // Only collapse/expand after scrolling past a small threshold (e.g., 10px)
-      if (currentScrollY < 10) {
-        // At the top, always show header
-        setIsHeaderVisible(true);
-      } else if (currentScrollY > lastScrollY.current) {
-        // Scrolling down - hide header
-        setIsHeaderVisible(false);
-      } else if (currentScrollY < lastScrollY.current) {
-        // Scrolling up - show header
-        setIsHeaderVisible(true);
-      }
+      // TODO: Uncomment this when we have a better way to handle header visibility
+      // if (currentScrollY < 10) {
+      //   // At the top, always show header
+      //   setIsHeaderVisible(true);
+      // } else if (currentScrollY > lastScrollY.current) {
+      //   // Scrolling down - hide header
+      //   setIsHeaderVisible(false);
+      // } else if (currentScrollY < lastScrollY.current) {
+      //   // Scrolling up - show header
+      //   setIsHeaderVisible(true);
+      // }
+
+      setIsHeaderVisible(true);
 
       lastScrollY.current = currentScrollY;
     };

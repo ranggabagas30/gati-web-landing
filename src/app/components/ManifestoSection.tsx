@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const manifestoTexts = [
-  'At the intersection of engineering and art, we cultivate progress—where technology is crafted with care.',
+  'At GATI\'s intersection of Engineering & Art, we cultivate progress\n—where technology is crafted with care.',
   'Creativity speaks with purpose, guided by clarity and responsibility.',
   'Every solution honors people, business, and the future.',
   'We provide clear creative direction and build efficient, scalable systems that help businesses grow safely and sustainably.',
@@ -109,16 +109,52 @@ export function ManifestoSection() {
         className="flex items-center justify-center min-h-screen px-6"
       >
         <div className="max-w-[800px] mx-auto grid">
-          {manifestoTexts.map((text, index) => (
-            <p
-              key={index}
-              ref={(el) => (textRefs.current[index] = el)}
-              className="col-start-1 row-start-1 text-white text-center text-3xl md:text-4xl lg:text-5xl leading-relaxed md:leading-relaxed lg:leading-[1.3]"
-              style={{ opacity: index === 0 ? 1 : 0 }}
-            >
-              {text}
-            </p>
-          ))}
+          {manifestoTexts.map((text, index) => {
+            if (index === 0) {
+              // Special styling for first manifesto text
+              return (
+                <p
+                  key={index}
+                  ref={(el) => {
+                    textRefs.current[index] = el;
+                  }}
+                  className="col-start-1 row-start-1 text-[#C5C9C3] text-center leading-relaxed"
+                  style={{ 
+                    opacity: index === 0 ? 1 : 0,
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '76px',
+                    fontWeight: 400,
+                    lineHeight: '92px',
+                  }}
+                >
+                  At{' '}
+                  <span style={{ color: '#ffffff', fontWeight: 700 }}>GATI</span>
+                  's intersection of{' '}
+                  <span style={{ color: '#f05123', fontWeight: 700 }}>Engineering</span>
+                  {' & '}
+                  <span style={{ color: '#f05123', fontWeight: 700 }}>Art</span>
+                  , we cultivate progress
+                  <br />
+                  <span style={{ fontSize: '24px', fontWeight: 400 }}>
+                    —where technology is crafted with care.
+                  </span>
+                </p>
+              );
+            }
+            
+            return (
+              <p
+                key={index}
+                ref={(el) => {
+                  textRefs.current[index] = el;
+                }}
+                className="col-start-1 row-start-1 text-white text-center text-3xl md:text-4xl lg:text-5xl leading-relaxed md:leading-relaxed lg:leading-[1.3]"
+                style={{ opacity: index === 0 ? 1 : 0 }}
+              >
+                {text}
+              </p>
+            );
+          })}
         </div>
       </div>
     </div>
