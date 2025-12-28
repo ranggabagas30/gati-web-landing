@@ -6,8 +6,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const manifestoTexts = [
   'At GATI\'s intersection of Engineering & Art, we cultivate progress\n—where technology is crafted with care.',
-  'Creativity speaks with purpose, guided by clarity and responsibility.',
-  'Every solution honors people, business, and the future.',
+  'GATI\'s Creativity speaks with purpose, guided by clarity and responsibility —Every solution honors People, Business, and the Future.',
+  'GATI provide clear direction and build efficient, scalable systems that help businesses grow safely and sustainably',
   'We provide clear creative direction and build efficient, scalable systems that help businesses grow safely and sustainably.',
 ];
 
@@ -137,6 +137,64 @@ export function ManifestoSection() {
                   <span className="text-xs md:text-base xl:text-lg 2xl:text-xl font-normal">
                     —Where technology is crafted with care.
                   </span>
+                </p>
+              );
+            }
+            
+            if (index === 1) {
+              // Special styling for second manifesto text (index 1)
+              return (
+                <p
+                  key={index}
+                  ref={(el) => {
+                    textRefs.current[index] = el;
+                  }}
+                  className="col-start-1 row-start-1 text-[#C5C9C3] text-center font-normal text-2xl md:text-4xl xl:text-5xl 2xl:text-6xl leading-tight md:leading-normal xl:leading-relaxed 2xl:leading-[1.2]"
+                  style={{ 
+                    opacity: 0,
+                    fontFamily: 'Inter, sans-serif',
+                  }}
+                >
+                  <span style={{ color: '#ffffff', fontWeight: 700 }}>GATI</span>
+                  's Creativity{' '}
+                  <span style={{ color: '#ffffff' }}>speaks</span>
+                  {' with '}
+                  <span style={{ color: '#f05123', fontWeight: 700 }}>purpose</span>
+                  {', guided by '}
+                  <span style={{ color: '#f05123', fontWeight: 700 }}>clarity</span>
+                  {' and '}
+                  <span style={{ color: '#f05123', fontWeight: 700 }}>responsibility</span>
+                  <br />
+                  <span className="text-xs md:text-base xl:text-lg 2xl:text-xl font-normal">
+                    —Every solution honors People, Business, and the Future.
+                  </span>
+                </p>
+              );
+            }
+            
+            if (index === 2) {
+              // Special styling for third manifesto text (index 2)
+              return (
+                <p
+                  key={index}
+                  ref={(el) => {
+                    textRefs.current[index] = el;
+                  }}
+                  className="col-start-1 row-start-1 text-[#C5C9C3] text-center font-normal text-2xl md:text-4xl xl:text-5xl 2xl:text-6xl leading-tight md:leading-normal xl:leading-relaxed 2xl:leading-[1.2]"
+                  style={{ 
+                    opacity: 0,
+                    fontFamily: 'Inter, sans-serif',
+                  }}
+                >
+                  <span style={{ color: '#ffffff', fontWeight: 700 }}>GATI</span>
+                  {' provide clear direction and build '}
+                  <span style={{ color: '#ffffff', fontWeight: 700 }}>efficient</span>
+                  {', '}
+                  <span style={{ color: '#ffffff', fontWeight: 700 }}>scalable</span>
+                  {' systems that help businesses grow '}
+                  <span style={{ color: '#ffffff', fontWeight: 700 }}>safely</span>
+                  {' and '}
+                  <span style={{ color: '#f05123', fontWeight: 700 }}>sustainably</span>
                 </p>
               );
             }
