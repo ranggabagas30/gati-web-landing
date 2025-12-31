@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "gati-website",
+  "name": "gati-web-landing",
   "compatibility_date": "2025-01-27",
   "assets": {
     "directory": "./dist",
