@@ -7,7 +7,8 @@
     "build": "vite build",
     "dev": "vite",
     "deploy": "npm run build && wrangler deploy",
-    "preview": "wrangler dev"
+    "preview": "wrangler dev",
+    "optimize-images": "node scripts/optimize-images.js"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
@@ -68,6 +69,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "4.1.12",
     "@vitejs/plugin-react": "4.7.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "4.1.12",
     "vite": "6.3.5",
     "wrangler": "^4.54.0"

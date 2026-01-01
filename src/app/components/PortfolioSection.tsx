@@ -14,9 +14,9 @@ const projects = [
     repoUrl: 'https://github.com/example/cuanx',
     liveUrl: 'https://cuanx.example.com',
     images: [
-      '/images/portfolio/porto-cuanx.png',
-      '/images/portfolio/porto-cuanx.png',
-      '/images/portfolio/porto-cuanx.png',
+      '/images/portfolio/porto-cuanx.webp',
+      '/images/portfolio/porto-cuanx.webp',
+      '/images/portfolio/porto-cuanx.webp',
     ],
   },
   {
@@ -27,9 +27,9 @@ const projects = [
     repoUrl: 'https://github.com/example/football-money',
     liveUrl: 'https://footballmoney.example.com',
     images: [
-      '/images/portfolio/porto-footballmoney.jpeg',
-      '/images/portfolio/porto-footballmoney.jpeg',
-      '/images/portfolio/porto-footballmoney.jpeg',
+      '/images/portfolio/porto-footballmoney.webp',
+      '/images/portfolio/porto-footballmoney.webp',
+      '/images/portfolio/porto-footballmoney.webp',
     ],
   },
   {
@@ -40,9 +40,9 @@ const projects = [
     repoUrl: 'https://github.com/example/flutter-iptv',
     liveUrl: 'https://flutteriptv.example.com',
     images: [
-      '/images/portfolio/porto-cuanx.png',
-      '/images/portfolio/porto-footballmoney.jpeg',
-      '/images/portfolio/porto-cuanx.png',
+      '/images/portfolio/porto-cuanx.webp',
+      '/images/portfolio/porto-footballmoney.webp',
+      '/images/portfolio/porto-cuanx.webp',
     ],
   },
 ];
@@ -152,6 +152,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
                     src={image}
                     alt={`${project.title} screenshot ${imgIndex + 1}`}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                     onError={(e) => {
                       // Fallback to placeholder if image fails to load
                       const target = e.target as HTMLImageElement;

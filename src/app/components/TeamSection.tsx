@@ -8,12 +8,12 @@ const teamMembers = [
   {
     name: 'Rangga Bagas',
     role: 'Business & Engineering',
-    image: '/images/profile/profile_rangga.jpeg',
+    image: '/images/profile/profile_rangga.webp',
   },
   {
     name: 'Tiffany Payuni',
     role: 'Marketing, Branding, Creative',
-    image: '/images/profile/profile_tiffany.jpeg',
+    image: '/images/profile/profile_tiffany.webp',
   },
 ];
 
@@ -64,6 +64,7 @@ export function TeamSection() {
                   src={member.image}
                   alt={member.name}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
               </div>
               <h3 className="text-xl md:text-2xl mb-1 transition-colors duration-300 group-hover:text-[#f05123]">
