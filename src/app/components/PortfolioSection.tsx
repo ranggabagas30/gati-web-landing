@@ -139,8 +139,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
           <div className="relative h-32 md:h-40 overflow-hidden rounded-lg">
             <div
               ref={carouselRef}
-              className="flex gap-4 absolute left-0"
-              style={{ width: '200%' }}
+              className="flex gap-4 absolute left-0 w-[200%]"
             >
               {/* Duplicate images for seamless loop */}
               {[...project.images, ...project.images].map((image, imgIndex) => (
@@ -193,19 +192,13 @@ export function PortfolioSection() {
     const peekHeight = cards[0].offsetHeight * 0.05; // 60% peek
     const hiddenHeight = cards[0].offsetHeight * 0.95; // 90% hidden
 
-    console.log("viewPortHeight: " + viewportHeight + ", cardContainerHeight: " + cardContainerHeight);
-    console.log("card height: " + cards[0].offsetHeight);
-    console.log("peekHeight: " + peekHeight + ", hiddenHeight: " + hiddenHeight);
-
     // Calculate active position (centered in viewport)
     const activeY = (viewportHeight - cardContainerHeight) / 2;
 
     // Set initial positions (peek state) with no rotation
-    console.log("set initial positions");
     cards.forEach((card, index) => {
       const initialY = peekHeight * index;
       const zIndex = cards.length - index;
-      console.log("card " + index + " initialY: " + initialY + ", zIndex: " + zIndex);
       gsap.set(card, {
         y: initialY,
         zIndex: zIndex, // Higher cards have lower z-index initially
@@ -215,10 +208,8 @@ export function PortfolioSection() {
     });
 
     // Create timeline
-    console.log("create timeline");
     const timeline = gsap.timeline({ paused: true });
     const progressPerCard = 1 / cards.length;
-    console.log("progressPerCard: " + progressPerCard);
 
     cards.forEach((card, index) => {
       const startProgress = index * progressPerCard;
@@ -266,7 +257,6 @@ export function PortfolioSection() {
       const newPeekHeight = cards[index].offsetHeight * 0.01;
       const newHiddenHeight = cards[index].offsetHeight * 1.35;
       const archivedY = -newHiddenHeight + (newPeekHeight * index);
-      console.log("card " + index + " startProgress: " + startProgress + ", rotationEndProgress: " + rotationEndProgress + ", activeEndProgress: " + activeEndProgress + ", archivedY: " + archivedY);
       timeline.to(
         card,
         {

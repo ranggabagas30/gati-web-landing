@@ -1,40 +1,21 @@
 import { useEffect, useState, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 
+const SCROLLED_THRESHOLD = 80;
+
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const lastScrollY = useRef(0);
+  const aboutSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    aboutSectionRef.current = document.getElementById('about-what-we-do') as HTMLElement | null;
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const aboutSection = document.getElementById('about-what-we-do');
-      
-      // Update background color based on scroll position
-      if (aboutSection) {
-        const rect = aboutSection.getBoundingClientRect();
-        setIsScrolled(rect.top <= 80);
+      if (aboutSectionRef.current) {
+        const rect = aboutSectionRef.current.getBoundingClientRect();
+        setIsScrolled(rect.top <= SCROLLED_THRESHOLD);
       }
-
-      // Handle header visibility based on scroll direction
-      // Only collapse/expand after scrolling past a small threshold (e.g., 10px)
-      // TODO: Uncomment this when we have a better way to handle header visibility
-      // if (currentScrollY < 10) {
-      //   // At the top, always show header
-      //   setIsHeaderVisible(true);
-      // } else if (currentScrollY > lastScrollY.current) {
-      //   // Scrolling down - hide header
-      //   setIsHeaderVisible(false);
-      // } else if (currentScrollY < lastScrollY.current) {
-      //   // Scrolling up - show header
-      //   setIsHeaderVisible(true);
-      // }
-
-      setIsHeaderVisible(true);
-
-      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -53,7 +34,7 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
-      } ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}
+      }`}
     >      
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">        
         <div className="flex items-center justify-center h-20">
