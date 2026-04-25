@@ -88,7 +88,7 @@ export function ManifestoSection() {
     ScrollTrigger.create({
       trigger: outerContainerRef.current,
       start: 'top top',
-      end: '+=400%',
+      end: '+=200%',
       pin: innerContainerRef.current,
       scrub: true,
       onUpdate: (self) => {
@@ -103,7 +103,7 @@ export function ManifestoSection() {
   }, []);
 
   return (
-    <div id="about" className="relative h-[500vh] bg-black" ref={outerContainerRef}>
+    <div id="about" className="relative h-[300vh] bg-black" ref={outerContainerRef}>
       <div
         ref={innerContainerRef}
         className="flex items-center justify-center min-h-screen px-4 md:px-6 xl:px-8 2xl:px-[120px]"

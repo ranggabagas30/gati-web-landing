@@ -274,7 +274,7 @@ export function PortfolioSection() {
     ScrollTrigger.create({
       trigger: section,
       start: 'top top',
-      end: '+=5000vh', // 10x longer duration for sufficient viewing time
+      end: '+=2500vh', // 5x longer duration for sufficient viewing time
       pin: pinnedContainer,
       scrub: 1,
       anticipatePin: 1,
@@ -288,7 +288,7 @@ export function PortfolioSection() {
       ScrollTrigger.create({
         trigger: section,
         start: 'top top',
-        end: '+=5000vh', // Match main ScrollTrigger duration
+        end: '+=2500vh', // Match main ScrollTrigger duration
         onUpdate: (self) => {
           const progress = self.progress;
           if (progress > 0.1) {
@@ -318,7 +318,7 @@ export function PortfolioSection() {
     <section
       id="work"
       ref={sectionRef}
-      className="relative h-[670vh] bg-[#f9f9f9]"
+      className="relative h-[335vh] bg-[#f9f9f9]"
     >
       <div
         ref={pinnedContainerRef}

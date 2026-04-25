@@ -47,10 +47,11 @@ export function Footer() {
           </p>
           <button 
             onClick={handleScheduleConversation}
-            className="bg-white text-[#f05123] px-8 py-4 rounded-full hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+            className="bg-white text-[#f05123] px-4 py-4 items-center rounded-full hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
           >
+            <img src="/images/icons/whatsapp.webp" alt="WhatsApp" className="h-5 w-auto inline-block mr-2" />
             Schedule a conversation
-          </button>
+          </button>         
         </div>
 
         <div className="border-t border-white/20 pt-8">
@@ -66,6 +67,11 @@ export function Footer() {
 
           <div className="text-center text-sm opacity-75">
             <p>© GATI — All rights reserved</p>
+             <p className="text-xs">
+              <a href="https://pngtree.com/freepng/whatsapp-phone-icon-vector_9015282.html" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">
+                WhatsApp icon by pngtree.com
+              </a>
+            </p>
             <p className="mt-2">Flexible pricing for startups and tight budgets</p>
           </div>
         </div>
