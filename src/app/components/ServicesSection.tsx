@@ -8,17 +8,17 @@ gsap.registerPlugin(ScrollTrigger);
 const services = [
   {
     icon: Smartphone,
-    title: 'Super-app development',
-    description: 'Scalable, multi-feature platforms',
+    title: 'Super-app',
+    description: 'Development, Scalable, multi-feature platforms',
   },
   {
     icon: Gamepad2,
-    title: 'Mobile game development',
-    description: 'Engaging and immersive user experiences',
+    title: 'Mobile game',
+    description: 'Development, Engaging, immersive user experiences',
   },
   {
     icon: Globe,
-    title: 'High-conversion landing websites',
+    title: 'Landing websites',
     description: 'Designed for clarity, trust, and results',
   },
 ];
@@ -71,11 +71,14 @@ export function ServicesSection() {
   }, []);
 
   return (
-    <section id="about-what-we-do" className="bg-white py-20 lg:py-40">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
+    <section id="about-what-we-do" className="bg-white py-20 lg:py-20">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[50px]">
         <div ref={titleRef} className="mb-12 lg:mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl max-w-[800px]">
-            Our technical and creative expertise focuses on high-impact digital products
+          <h2 className="text-3xl md:text-4xl lg:text-5xl max-w-full">
+            Our technical and creative expertise
+          </h2>
+          <h2  className="text-3xl md:text-4xl lg:text-5xl max-w-full">
+            focuses on high-impact digital products
           </h2>
         </div>
 
@@ -86,14 +89,14 @@ export function ServicesSection() {
               <div
                 key={index}
                 ref={(el) => (itemsRef.current[index] = el)}
-                className="flex items-start gap-6"
+                className="flex items-start gap-10"
               >
-                <div className="flex-shrink-0">
+                {/* <div className="flex-shrink-0">
                   <Icon className="w-8 h-8 text-[#f05123]" strokeWidth={1.5} />
-                </div>
+                </div> */}
                 <div>
-                  <h3 className="text-xl md:text-2xl mb-2">{service.title}</h3>
-                  <p className="text-[#6b6b6b] text-base md:text-lg">{service.description}</p>
+                  <h3 className="text-[#f05123] text-5xl md:text-8xl w-full text-left transition-colors duration-500 font-semibold m-0">{service.title}</h3>
+                  <p className="text-[#6b6b6b] text-base md:text-lg mt-2.5">{service.description}</p>
                 </div>
               </div>
             );

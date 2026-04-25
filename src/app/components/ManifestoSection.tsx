@@ -88,7 +88,7 @@ export function ManifestoSection() {
     ScrollTrigger.create({
       trigger: outerContainerRef.current,
       start: 'top top',
-      end: '+=400%',
+      end: '+=200%',
       pin: innerContainerRef.current,
       scrub: true,
       onUpdate: (self) => {
@@ -103,7 +103,7 @@ export function ManifestoSection() {
   }, []);
 
   return (
-    <div id="about" className="relative h-[500vh] bg-black" ref={outerContainerRef}>
+    <div id="about" className="relative h-[300vh] bg-black" ref={outerContainerRef}>
       <div
         ref={innerContainerRef}
         className="flex items-center justify-center min-h-screen px-4 md:px-6 xl:px-8 2xl:px-[120px]"
@@ -119,17 +119,14 @@ export function ManifestoSection() {
                     textRefs.current[index] = el;
                   }}
                   className="col-start-1 row-start-1 text-[#C5C9C3] text-center font-normal text-2xl md:text-4xl xl:text-5xl 2xl:text-6xl leading-tight md:leading-normal xl:leading-relaxed 2xl:leading-[1.2]"
-                  style={{ 
-                    opacity: index === 0 ? 1 : 0,
-                    fontFamily: 'Inter, sans-serif',
-                  }}
+                  style={{ opacity: index === 0 ? 1 : 0 }}
                 >
                   At{' '}
-                  <span style={{ color: '#ffffff', fontWeight: 700 }}>GATI</span>
+                  <span className="text-white font-bold">GATI</span>
                   's intersection of{' '}
-                  <span style={{ color: '#f05123', fontWeight: 700 }}>Engineering</span>
+                  <span className="text-[#f05123] font-bold">Engineering</span>
                   {' & '}
-                  <span style={{ color: '#f05123', fontWeight: 700 }}>Art</span>
+                  <span className="text-[#f05123] font-bold">Art</span>
                   , 
                   <br />
                     we cultivate progress
@@ -150,20 +147,17 @@ export function ManifestoSection() {
                     textRefs.current[index] = el;
                   }}
                   className="col-start-1 row-start-1 text-[#C5C9C3] text-center font-normal text-2xl md:text-4xl xl:text-5xl 2xl:text-6xl leading-tight md:leading-normal xl:leading-relaxed 2xl:leading-[1.2]"
-                  style={{ 
-                    opacity: 0,
-                    fontFamily: 'Inter, sans-serif',
-                  }}
+                  style={{ opacity: 0 }}
                 >
-                  <span style={{ color: '#ffffff', fontWeight: 700 }}>GATI</span>
+                  <span className="text-white font-bold">GATI</span>
                   's Creativity{' '}
-                  <span style={{ color: '#ffffff' }}>speaks</span>
+                  <span className="text-white">speaks</span>
                   {' with '}
-                  <span style={{ color: '#f05123', fontWeight: 700 }}>purpose</span>
+                  <span className="text-[#f05123] font-bold">purpose</span>
                   {', guided by '}
-                  <span style={{ color: '#f05123', fontWeight: 700 }}>clarity</span>
+                  <span className="text-[#f05123] font-bold">clarity</span>
                   {' and '}
-                  <span style={{ color: '#f05123', fontWeight: 700 }}>responsibility</span>
+                  <span className="text-[#f05123] font-bold">responsibility</span>
                   <br />
                   <span className="text-xs md:text-base xl:text-lg 2xl:text-xl font-normal">
                     —Every solution honors People, Business, and the Future.
@@ -181,20 +175,17 @@ export function ManifestoSection() {
                     textRefs.current[index] = el;
                   }}
                   className="col-start-1 row-start-1 text-[#C5C9C3] text-center font-normal text-2xl md:text-4xl xl:text-5xl 2xl:text-6xl leading-tight md:leading-normal xl:leading-relaxed 2xl:leading-[1.2]"
-                  style={{ 
-                    opacity: 0,
-                    fontFamily: 'Inter, sans-serif',
-                  }}
+                  style={{ opacity: 0 }}
                 >
-                  <span style={{ color: '#ffffff', fontWeight: 700 }}>GATI</span>
+                  <span className="text-white font-bold">GATI</span>
                   {' provide clear direction and build '}
-                  <span style={{ color: '#ffffff', fontWeight: 700 }}>efficient</span>
+                  <span className="text-white font-bold">efficient</span>
                   {', '}
-                  <span style={{ color: '#ffffff', fontWeight: 700 }}>scalable</span>
+                  <span className="text-white font-bold">scalable</span>
                   {' systems that help businesses grow '}
-                  <span style={{ color: '#ffffff', fontWeight: 700 }}>safely</span>
+                  <span className="text-white font-bold">safely</span>
                   {' and '}
-                  <span style={{ color: '#f05123', fontWeight: 700 }}>sustainably</span>
+                  <span className="text-[#f05123] font-bold">sustainably</span>
                 </p>
               );
             }

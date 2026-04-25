@@ -39,18 +39,22 @@ export function Footer() {
 
   return (
     <footer id="contact" className="bg-[#f05123] text-white py-20 lg:py-32">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-6 lg:px-[120px]">
         <div ref={ctaRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl mb-6">Let's make progress, responsibly.</h2>
+          <p className="text-xl md:text-2xl opacity-90">
+            Tell us where you are today —
+          </p>
           <p className="text-xl md:text-2xl mb-8 opacity-90">
-            Tell us where you are today — we'll help you plan the next step.
+            we'll help you plan the next step.
           </p>
           <button 
             onClick={handleScheduleConversation}
-            className="bg-white text-[#f05123] px-8 py-4 rounded-full hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+            className="bg-white text-[#f05123] px-4 py-4 items-center rounded-full hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
           >
+            <img src="/images/icons/whatsapp.webp" alt="WhatsApp" className="h-5 w-auto inline-block mr-2" />
             Schedule a conversation
-          </button>
+          </button>         
         </div>
 
         <div className="border-t border-white/20 pt-8">
@@ -65,7 +69,7 @@ export function Footer() {
           </div>
 
           <div className="text-center text-sm opacity-75">
-            <p>© GATI — All rights reserved</p>
+            <p>© GATI — All rights reserved</p>             
             <p className="mt-2">Flexible pricing for startups and tight budgets</p>
           </div>
         </div>
