@@ -53,7 +53,7 @@ export function TeamSection() {
   }, []);
 
   return (
-    <section className="bg-white py-20 lg:py-40">
+    <section className="bg-white py-10 lg:pb-20">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 justify-items-center">
           {teamMembers.map((member, index) => (
@@ -63,7 +63,7 @@ export function TeamSection() {
               target="_blank"
               rel="noopener noreferrer"
               ref={(el) => (cardsRef.current[index] = el)}
-              className="group cursor-pointer block"
+              className="group cursor-pointer block justify-items-center"
             >
               <div className="overflow-hidden rounded-full w-[120px] h-[120px] md:w-[150px] md:h-[150px] mb-4 transition-transform duration-300 group-hover:scale-105">
                 <img

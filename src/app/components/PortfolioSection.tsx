@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Github, ExternalLink } from 'lucide-react';
+import { FaGooglePlay, FaAppStoreIos } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,22 +11,30 @@ const projects = [
     title: 'CuanX',
     users: '100,000+',
     labels: ['Super-app', 'PPOB', 'Realtime', 'Chat', 'Payment', 'Mobile App'],
-    description: 'CuanX is here with practical and innovative solutions for your daily needs. With online motorcycle taxi services, online taxis, and digital product purchases, we help you live your life easier, more comfortable, and more efficient.',
+    description: 'MVP for CuanX, a ',
+    boldDescription: 'Super-App', 
+    descriptionAfterBold: ' designed for everyday convenience. Integrates transportation services and digital purchases into a single, user-friendly platform—focused on clarity, usability, and scalability.',
     repoUrl: 'https://github.com/example/cuanx',
     liveUrl: 'https://cuanx.co.id/',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=co.id.cuanx.customer',
+    appStoreUrl: 'https://apps.apple.com/us/app/cuanx/id6754905079',
     images: [
       '/images/portfolio/cuanx1.webp',
       '/images/portfolio/cuanx2.webp',
-      '/images/portfolio/cuanx3.png',
+      '/images/portfolio/cuanx4.webp',
     ],
   },
   {
     title: 'Football Money',
     users: '10,000+',
     labels: ['Fantasy Sport', 'Game', 'Stocks', 'Mobile App'],
-    description: 'Football Money is a virtual trading platform where users can engage in the exciting world of football by trading European footballers like stocks. Player prices fluctuate based on performance and market demand, creating a dynamic and competitive environment.',
+    description: '',
+    boldDescription: 'iOS and Android app ',
+    descriptionAfterBold: 'for Football Money, a strategy-driven fantasy sports platform. Evolved from web into a native mobile experience, simplifying complex systems to improve engagement and retention.',
     repoUrl: 'https://github.com/example/football-money',
-    liveUrl: 'https://apps.apple.com/id/app/football-money/id6605934587?l=id',
+    liveUrl: 'https://www.instagram.com/footballmoney_/',
+    playStoreUrl: '',
+    appStoreUrl: 'https://apps.apple.com/id/app/football-money/id6605934587',
     images: [
       '/images/portfolio/footballmoney1.webp',
       '/images/portfolio/footballmoney2.webp',
@@ -36,9 +45,13 @@ const projects = [
     title: 'Flutter IPTV For Hotel',
     users: '100+',
     labels: ['IPTV', 'Live Streaming', 'Mobile App'],
-    description: 'Flutter IPTV is a mobile TV App which runs in STB (Set Top Box) to stream live tv channels from IPTV providers. Smart technology for a seamless and enjoyable digital experience in every room. Make your guests feel special during their stay at your hotel by providing easily accessible services, entertainment, and information through an intuitive IPTV display',
+    description: '',
+    boldDescription: 'Flutter-based IPTV app ',
+    descriptionAfterBold: 'for hotel environments, built for STB devices. Streams live TV from IPTV providers with a focus on stability, performance, and seamless guest experience.',
     repoUrl: 'https://github.com/example/flutter-iptv',
     liveUrl: 'https://crt.id/expertise',
+    playStoreUrl: '',
+    appStoreUrl: '',
     images: [
       '/images/portfolio/iptv1.webp',
       '/images/portfolio/iptv2.webp',
@@ -55,9 +68,37 @@ interface PortfolioCardProps {
     description: string;
     repoUrl: string;
     liveUrl: string;
+    playStoreUrl: string;
+    appStoreUrl: string;
     images: string[];
+    boldDescription: string;
+    descriptionAfterBold: string;
   };
   index: number;
+}
+
+
+// FolderTab component for the file divider tip
+function FolderTab({ color, index }: { color: string; index: number }) {
+  // color: background color (e.g. #fff or #f05123)
+  // index: for left offset
+  return (
+    <div
+      className="absolute"
+      style={{
+        top: 0,
+        right: 0,
+        width: 140,
+        height: 36,
+        borderTopRightRadius: 16,
+        borderTopLeftRadius: 16,
+        borderBottomRightRadius: 8,
+        background: color,
+        boxShadow: '0 2px 8px 0 rgba(0,0,0,0.08)',
+        transform: `translateX(-${index * 20}px)`
+      }}
+    />
+  );
 }
 
 const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
@@ -83,6 +124,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
 
     // Alternate background colors: white for even index, orange for odd index
     const backgroundColor = index % 2 === 0 ? 'bg-white' : 'bg-[#f05123]';
+    const backgroundHex = index % 2 === 0 ? '#fff' : '#f05123';
     const textColor = index % 2 === 0 ? 'text-[#0f0f0f]' : 'text-white';
     const descriptionColor = index % 2 === 0 ? 'text-[#6b6b6b]' : 'text-white/90';
     const buttonStyle = index % 2 === 0 
@@ -98,6 +140,8 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
           transformStyle: 'preserve-3d',
         }}
       >
+        {/* Folder tab divider tip */}
+        {/* <FolderTab color={backgroundHex} index={index} /> */}
         <div className="h-full flex flex-col">
           {/* Title Section */}
           <div className="mb-4 md:mb-6">
@@ -110,13 +154,14 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
           <div className="flex-1 mb-4 md:mb-6">
             <p className={`${descriptionColor} text-base md:text-lg leading-relaxed`}>
               {project.description}
+              <span className={`font-bold ${textColor}`}>{project.boldDescription}</span>
+              {project.descriptionAfterBold}
             </p>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-3 mb-4 md:mb-6">
-            {/* Repo Button 
-            <a
+          <div className="flex flex-wrap gap-3 mb-4 md:mb-6">            
+            {/* <a
               href={project.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -124,7 +169,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
             >
               <Github size={18} />
               Repo
-            </a>*/}            
+            </a>            */}
             <a
               href={project.liveUrl}
               target="_blank"
@@ -134,24 +179,46 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
               <ExternalLink size={18} />
               Live
             </a>
+            {project.playStoreUrl && (
+              <a
+                href={project.playStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2 ${buttonStyle} px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors`}
+              >
+                <FaGooglePlay size={18} />
+                Play Store
+              </a>
+            )}
+            {project.appStoreUrl && (
+              <a
+                href={project.appStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2 ${buttonStyle} px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors`}
+              >
+                <FaAppStoreIos size={18} />
+                App Store
+              </a>
+            )}
           </div>
 
           {/* Animated Image Carousel */}
           <div className="relative aspect-[1242/2208] overflow-hidden rounded-lg">
             <div
               ref={carouselRef}
-              className="flex gap-4 absolute left-0 w-[200%]"
+              className="flex gap-4 absolute left-0 w-[50%]"
             >
               {/* Duplicate images for seamless loop */}
               {[...project.images, ...project.images].map((image, imgIndex) => (
                 <div
                   key={imgIndex}
-                  className="flex-shrink-0 w-48 md:w-64 rounded-lg overflow-hidden bg-[#f9f9f9]"
+                  className="flex-shrink-0 w-48 md:w-64 rounded-lg bg-[#f9f9f9]"
                 >
                   <img
                     src={image}
                     alt={`${project.title} screenshot ${imgIndex + 1}`}
-                    className="w-full h-full object-cover"
+                    className="max-w-full h-auto object-contain"
                     loading="lazy"
                     onError={(e) => {
                       // Fallback to placeholder if image fails to load
@@ -274,7 +341,7 @@ export function PortfolioSection() {
     ScrollTrigger.create({
       trigger: section,
       start: 'top top',
-      end: '+=2500vh', // 5x longer duration for sufficient viewing time
+      end: '+=5000vh', // 10x longer duration for sufficient viewing time
       pin: pinnedContainer,
       scrub: 1,
       anticipatePin: 1,
@@ -288,7 +355,7 @@ export function PortfolioSection() {
       ScrollTrigger.create({
         trigger: section,
         start: 'top top',
-        end: '+=2500vh', // Match main ScrollTrigger duration
+        end: '+=5000vh', // Match main ScrollTrigger duration
         onUpdate: (self) => {
           const progress = self.progress;
           if (progress > 0.1) {
@@ -318,18 +385,18 @@ export function PortfolioSection() {
     <section
       id="work"
       ref={sectionRef}
-      className="relative h-[335vh] bg-[#f9f9f9]"
+      className="relative h-[630vh] md:h-[600vh] bg-[#f9f9f9]"
     >
       <div
         ref={pinnedContainerRef}
-        className="relative min-h-screen flex flex-col items-center justify-center py-20"
+        className="relative min-h-screen flex flex-col items-center justify-center"
       >
         <div
           ref={titleRef}
-          className="absolute top-12 md:top-16 lg:top-20 left-0 right-0 text-center px-4 md:px-6 lg:px-[120px] z-40"
+          className="absolute top-30 md:top-16 lg:top-40 left-0 right-0 text-center px-4 md:px-6 lg:px-[120px]"
         >
-        <h2 className="text-3xl md:text-4xl lg:text-5xl">Selected Works</h2>
-      </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl">Selected Works</h2>
+        </div>
 
         <div
           ref={cardContainerRef}
@@ -349,7 +416,7 @@ export function PortfolioSection() {
               index={index}
             />
                   ))}
-                </div>
+        </div>
       </div>
     </section>
   );

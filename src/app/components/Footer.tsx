@@ -39,11 +39,14 @@ export function Footer() {
 
   return (
     <footer id="contact" className="bg-[#f05123] text-white py-20 lg:py-32">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-6 lg:px-[120px]">
         <div ref={ctaRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl mb-6">Let's make progress, responsibly.</h2>
+          <p className="text-xl md:text-2xl opacity-90">
+            Tell us where you are today —
+          </p>
           <p className="text-xl md:text-2xl mb-8 opacity-90">
-            Tell us where you are today — we'll help you plan the next step.
+            we'll help you plan the next step.
           </p>
           <button 
             onClick={handleScheduleConversation}
@@ -66,12 +69,7 @@ export function Footer() {
           </div>
 
           <div className="text-center text-sm opacity-75">
-            <p>© GATI — All rights reserved</p>
-             <p className="text-xs">
-              <a href="https://pngtree.com/freepng/whatsapp-phone-icon-vector_9015282.html" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">
-                WhatsApp icon by pngtree.com
-              </a>
-            </p>
+            <p>© GATI — All rights reserved</p>             
             <p className="mt-2">Flexible pricing for startups and tight budgets</p>
           </div>
         </div>
