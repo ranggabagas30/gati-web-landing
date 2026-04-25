@@ -10,39 +10,39 @@ const projects = [
     title: 'CuanX',
     users: '100,000+',
     labels: ['Super-app', 'PPOB', 'Realtime', 'Chat', 'Payment', 'Mobile App'],
-    description: 'Complete financial ecosystem platform',
+    description: 'CuanX is here with practical and innovative solutions for your daily needs. With online motorcycle taxi services, online taxis, and digital product purchases, we help you live your life easier, more comfortable, and more efficient.',
     repoUrl: 'https://github.com/example/cuanx',
-    liveUrl: 'https://cuanx.example.com',
+    liveUrl: 'https://cuanx.co.id/',
     images: [
-      '/images/portfolio/porto-cuanx.webp',
-      '/images/portfolio/porto-cuanx.webp',
-      '/images/portfolio/porto-cuanx.webp',
+      '/images/portfolio/cuanx1.webp',
+      '/images/portfolio/cuanx2.webp',
+      '/images/portfolio/cuanx3.png',
     ],
   },
   {
     title: 'Football Money',
     users: '10,000+',
     labels: ['Fantasy Sport', 'Game', 'Stocks', 'Mobile App'],
-    description: 'Fantasy sports meets investment platform',
+    description: 'Football Money is a virtual trading platform where users can engage in the exciting world of football by trading European footballers like stocks. Player prices fluctuate based on performance and market demand, creating a dynamic and competitive environment.',
     repoUrl: 'https://github.com/example/football-money',
-    liveUrl: 'https://footballmoney.example.com',
+    liveUrl: 'https://apps.apple.com/id/app/football-money/id6605934587?l=id',
     images: [
-      '/images/portfolio/porto-footballmoney.webp',
-      '/images/portfolio/porto-footballmoney.webp',
-      '/images/portfolio/porto-footballmoney.webp',
+      '/images/portfolio/footballmoney1.webp',
+      '/images/portfolio/footballmoney2.webp',
+      '/images/portfolio/footballmoney3.webp',
     ],
   },
   {
     title: 'Flutter IPTV For Hotel',
     users: '100+',
     labels: ['IPTV', 'Live Streaming', 'Mobile App'],
-    description: 'Flutter IPTV is a mobile TV App which runs in STB (Set Top Box) to stream live tv channels from IPTV providers',
+    description: 'Flutter IPTV is a mobile TV App which runs in STB (Set Top Box) to stream live tv channels from IPTV providers. Smart technology for a seamless and enjoyable digital experience in every room. Make your guests feel special during their stay at your hotel by providing easily accessible services, entertainment, and information through an intuitive IPTV display',
     repoUrl: 'https://github.com/example/flutter-iptv',
-    liveUrl: 'https://flutteriptv.example.com',
+    liveUrl: 'https://crt.id/expertise',
     images: [
-      '/images/portfolio/porto-cuanx.webp',
-      '/images/portfolio/porto-footballmoney.webp',
-      '/images/portfolio/porto-cuanx.webp',
+      '/images/portfolio/iptv1.webp',
+      '/images/portfolio/iptv2.webp',
+      '/images/portfolio/iptv3.webp',
     ],
   },
 ];
@@ -115,6 +115,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
 
           {/* Action Buttons */}
           <div className="flex gap-3 mb-4 md:mb-6">
+            {/* Repo Button 
             <a
               href={project.repoUrl}
               target="_blank"
@@ -123,7 +124,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
             >
               <Github size={18} />
               Repo
-            </a>
+            </a>*/}            
             <a
               href={project.liveUrl}
               target="_blank"
@@ -136,7 +137,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
           </div>
 
           {/* Animated Image Carousel */}
-          <div className="relative h-32 md:h-40 overflow-hidden rounded-lg">
+          <div className="relative aspect-[1242/2208] overflow-hidden rounded-lg">
             <div
               ref={carouselRef}
               className="flex gap-4 absolute left-0 w-[200%]"
@@ -145,7 +146,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
               {[...project.images, ...project.images].map((image, imgIndex) => (
                 <div
                   key={imgIndex}
-                  className="flex-shrink-0 w-48 md:w-64 h-full rounded-lg overflow-hidden bg-[#f9f9f9]"
+                  className="flex-shrink-0 w-48 md:w-64 rounded-lg overflow-hidden bg-[#f9f9f9]"
                 >
                   <img
                     src={image}
