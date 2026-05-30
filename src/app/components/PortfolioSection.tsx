@@ -1,104 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Github, ExternalLink } from 'lucide-react';
-import { FaGooglePlay, FaAppStoreIos } from "react-icons/fa";
+import { ExternalLink } from 'lucide-react';
+import { FaGooglePlay, FaAppStoreIos } from 'react-icons/fa';
+import { portfolioProjects, type PortfolioProject } from '../portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projects = [
-  {
-    title: 'CuanX',
-    users: '100,000+',
-    labels: ['Super-app', 'PPOB', 'Realtime', 'Chat', 'Payment', 'Mobile App'],
-    description: 'MVP for CuanX, a ',
-    boldDescription: 'Super-App', 
-    descriptionAfterBold: ' designed for everyday convenience. Integrates transportation services and digital purchases into a single, user-friendly platform—focused on clarity, usability, and scalability.',
-    repoUrl: 'https://github.com/example/cuanx',
-    liveUrl: 'https://cuanx.co.id/',
-    playStoreUrl: 'https://play.google.com/store/apps/details?id=co.id.cuanx.customer',
-    appStoreUrl: 'https://apps.apple.com/us/app/cuanx/id6754905079',
-    images: [
-      '/images/portfolio/cuanx1.webp',
-      '/images/portfolio/cuanx2.webp',
-      '/images/portfolio/cuanx4.webp',
-    ],
-  },
-  {
-    title: 'Football Money',
-    users: '10,000+',
-    labels: ['Fantasy Sport', 'Game', 'Stocks', 'Mobile App'],
-    description: '',
-    boldDescription: 'iOS and Android app ',
-    descriptionAfterBold: 'for Football Money, a strategy-driven fantasy sports platform. Evolved from web into a native mobile experience, simplifying complex systems to improve engagement and retention.',
-    repoUrl: 'https://github.com/example/football-money',
-    liveUrl: 'https://www.instagram.com/footballmoney_/',
-    playStoreUrl: '',
-    appStoreUrl: 'https://apps.apple.com/id/app/football-money/id6605934587',
-    images: [
-      '/images/portfolio/footballmoney1.webp',
-      '/images/portfolio/footballmoney2.webp',
-      '/images/portfolio/footballmoney3.webp',
-    ],
-  },
-  {
-    title: 'Flutter IPTV For Hotel',
-    users: '100+',
-    labels: ['IPTV', 'Live Streaming', 'Mobile App'],
-    description: '',
-    boldDescription: 'Flutter-based IPTV app ',
-    descriptionAfterBold: 'for hotel environments, built for STB devices. Streams live TV from IPTV providers with a focus on stability, performance, and seamless guest experience.',
-    repoUrl: 'https://github.com/example/flutter-iptv',
-    liveUrl: 'https://crt.id/expertise',
-    playStoreUrl: '',
-    appStoreUrl: '',
-    images: [
-      '/images/portfolio/iptv1.webp',
-      '/images/portfolio/iptv2.webp',
-      '/images/portfolio/iptv3.webp',
-    ],
-  },
-];
-
 interface PortfolioCardProps {
-  project: {
-    title: string;
-    users: string;
-    labels: string[];
-    description: string;
-    repoUrl: string;
-    liveUrl: string;
-    playStoreUrl: string;
-    appStoreUrl: string;
-    images: string[];
-    boldDescription: string;
-    descriptionAfterBold: string;
-  };
+  project: PortfolioProject;
   index: number;
-}
-
-
-// FolderTab component for the file divider tip
-function FolderTab({ color, index }: { color: string; index: number }) {
-  // color: background color (e.g. #fff or #f05123)
-  // index: for left offset
-  return (
-    <div
-      className="absolute"
-      style={{
-        top: 0,
-        right: 0,
-        width: 140,
-        height: 36,
-        borderTopRightRadius: 16,
-        borderTopLeftRadius: 16,
-        borderBottomRightRadius: 8,
-        background: color,
-        boxShadow: '0 2px 8px 0 rgba(0,0,0,0.08)',
-        transform: `translateX(-${index * 20}px)`
-      }}
-    />
-  );
 }
 
 const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
@@ -124,24 +35,43 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
 
     // Alternate background colors: white for even index, orange for odd index
     const backgroundColor = index % 2 === 0 ? 'bg-white' : 'bg-[#f05123]';
-    const backgroundHex = index % 2 === 0 ? '#fff' : '#f05123';
     const textColor = index % 2 === 0 ? 'text-[#0f0f0f]' : 'text-white';
     const descriptionColor = index % 2 === 0 ? 'text-[#6b6b6b]' : 'text-white/90';
     const buttonStyle = index % 2 === 0 
       ? 'bg-white border-2 border-[#e9ebef] text-[#0f0f0f] hover:bg-[#f9f9f9]'
       : 'bg-white/10 border-2 border-white/20 text-white hover:bg-white/20';
 
+    const navigateToDetail = () => {
+      window.location.hash = `#/portfolio/${project.slug}`;
+    };
+
+    const handleCardKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (event.key !== 'Enter' && event.key !== ' ') {
+        return;
+      }
+
+      event.preventDefault();
+      navigateToDetail();
+    };
+
+    const stopCardNavigation = (event: React.MouseEvent<HTMLAnchorElement>) => {
+      event.stopPropagation();
+    };
+
     return (
       <div
         ref={ref}
-        className={`absolute ${backgroundColor} rounded-[20px] md:rounded-[32px] p-6 md:p-8 shadow-xl w-full h-full`}
+        className={`absolute ${backgroundColor} rounded-[20px] md:rounded-[32px] p-6 md:p-8 shadow-xl w-full h-full cursor-pointer`}
+        onClick={navigateToDetail}
+        onKeyDown={handleCardKeyDown}
+        role="button"
+        tabIndex={0}
+        aria-label={`Open ${project.title} case study`}
         style={{
           willChange: 'transform',
           transformStyle: 'preserve-3d',
         }}
       >
-        {/* Folder tab divider tip */}
-        {/* <FolderTab color={backgroundHex} index={index} /> */}
         <div className="h-full flex flex-col">
           {/* Title Section */}
           <div className="mb-4 md:mb-6">
@@ -174,6 +104,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={stopCardNavigation}
               className={`inline-flex items-center gap-2 ${buttonStyle} px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors`}
             >
               <ExternalLink size={18} />
@@ -184,6 +115,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
                 href={project.playStoreUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={stopCardNavigation}
                 className={`inline-flex items-center gap-2 ${buttonStyle} px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors`}
               >
                 <FaGooglePlay size={18} />
@@ -195,6 +127,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
                 href={project.appStoreUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={stopCardNavigation}
                 className={`inline-flex items-center gap-2 ${buttonStyle} px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors`}
               >
                 <FaAppStoreIos size={18} />
@@ -406,9 +339,9 @@ export function PortfolioSection() {
             perspective: '1200px',
           }}
         >
-        {projects.map((project, index) => (
+        {portfolioProjects.map((project, index) => (
             <PortfolioCard
-            key={index}
+            key={project.slug}
               ref={(el) => {
                 cardsRef.current[index] = el;
               }}
