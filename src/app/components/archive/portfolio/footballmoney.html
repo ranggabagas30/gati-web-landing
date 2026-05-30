@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Money Case Study - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ffffff;
+            --secondary: #f8f8f8;
+            --accent: #1d4ed8;
+            --accent-dark: #1e40af;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --border: #e5e5e5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--primary);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--accent-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(29, 78, 216, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        /* Metadata */
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-top: 5rem;
+            padding-top: 4rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .meta-item {
+            text-align: left;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .meta-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        /* Section Pattern: Text + Image */
+        .section-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 8rem;
+        }
+
+        .section-block.reverse {
+            direction: rtl;
+        }
+
+        .section-block.reverse > * {
+            direction: ltr;
+        }
+
+        .section-text {
+            max-width: 500px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-text p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .section-text h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-text ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-text li {
+            margin-bottom: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Screenshot Placeholder */
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, var(--secondary) 0%, rgba(29, 78, 216, 0.05) 100%);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            aspect-ratio: 4/3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .screenshot-placeholder:hover {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, var(--secondary) 0%, rgba(29, 78, 216, 0.1) 100%);
+        }
+
+        .screenshot-placeholder svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 1.5rem;
+            opacity: 0.4;
+            color: var(--accent);
+        }
+
+        .screenshot-label {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .screenshot-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* What We Built - Inline Layout */
+        .features-section {
+            margin-bottom: 8rem;
+        }
+
+        .features-section h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .features-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .features-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+        .feature-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .feature-item.reverse {
+            direction: rtl;
+        }
+
+        .feature-item.reverse > * {
+            direction: ltr;
+        }
+
+        .feature-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-content p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        .feature-visual {
+            background: linear-gradient(135deg, var(--secondary) 0%, rgba(29, 78, 216, 0.05) 100%);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            aspect-ratio: 4/3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-secondary);
+        }
+
+        .feature-visual svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+            color: var(--accent);
+        }
+
+        .feature-visual-label {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        /* Tech Stack */
+        .tech-section {
+            margin-top: 4rem;
+        }
+
+        .tech-section h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .tech-item {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .tech-layer {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .tech-reason {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Results - Bottom Section */
+        .results-bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 6rem;
+            padding-top: 4rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .results-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .results-embed {
+            background: var(--secondary);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .results-embed-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            padding: 5rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 6rem 0 0 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--accent);
+        }
+
+        .btn-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            padding: 4rem 2rem;
+            border-top: 2px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .section-block,
+            .feature-item,
+            .results-bottom {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .section-block.reverse,
+            .feature-item.reverse {
+                direction: ltr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .metadata-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .results-stats {
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">GATI</div>
+        <ul class="nav-links">
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Portfolio Case Study</span>
+            <h1>Football Money: Trading Real Players Like Stocks</h1>
+            <p class="hero-subtitle">How we built a fantasy sports game where players are tradeable assets, price moves in real-time, and skill actually matters. From concept to public beta in 6 months.</p>
+            
+            <div class="metadata-grid">
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div class="meta-value">6 Months</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Status</div>
+                    <div class="meta-value">Public Beta</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Platforms</div>
+                    <div class="meta-value">iOS + Android</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Focus</div>
+                    <div class="meta-value">Game Design</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Section 1: Challenge -->
+        <section class="section-block">
+            <div class="section-text">
+                <h2 class="section-title">The Problem</h2>
+                <p>Fantasy football is boring. You pick a lineup on Monday. Then you wait seven days. On Sunday you check the score. You either win or lose.</p>
+                <p>That's it. No interaction. No strategy. No reward for spotting talent early.</p>
+                <p>Football Money asked: What if players were tradeable? What if prices moved based on real performance? What if you could buy low, sell high, actually execute on your football knowledge?</p>
+                
+                <h3>What We Had to Solve</h3>
+                <ul>
+                    <li>Make stock trading feel natural to sports fans (two different domains)</li>
+                    <li>Real-time price updates tied to live match data</li>
+                    <li>Intuitive UI for something inherently complex</li>
+                    <li>Engage users who expect a game, not a spreadsheet</li>
+                </ul>
+            </div>
+
+            <div class="section-visual">
+                <div class="screenshot-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    <div class="screenshot-label">Game Interface</div>
+                    <div class="screenshot-description">REPLACE: Football Money App Screens</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Design-First Approach -->
+        <section class="section-block reverse">
+            <div class="section-text">
+                <h2 class="section-title">Design First</h2>
+                <p>We didn't build mechanics and then try to make them pretty. We started with the user. What feels natural? What's intuitive? What gets people excited?</p>
+                <p>We ran persona research. We tested wireframes with football fans and traders. We ran FigJam sessions to find the right metaphors.</p>
+            </div>
+
+            <div class="section-visual">
+                <div class="screenshot-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    <div class="screenshot-label">Design Process</div>
+                    <div class="screenshot-description">Wireframes and user testing</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: MVP Strategy -->
+        <section class="section-block">
+            <div class="section-text">
+                <h2 class="section-title">MVP to Beta</h2>
+                <p>1 month to build a working prototype. Test core mechanics: Can users understand stock trading? Does the game loop feel rewarding? Is live match integration working?</p>
+                <p>Google Play internal testing first. Then TestFlight for iOS. Real users. Real feedback. Fast iteration.</p>
+                <p>6 months later: Public beta on both stores. Thousands of active users trading, competing, building portfolios.</p>
+            </div>
+
+            <div class="section-visual">
+                <div class="screenshot-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <div class="screenshot-label">Live Gameplay</div>
+                    <div class="screenshot-description">Real-time trading during matches</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Built Section -->
+        <section class="features-section">
+            <h2>What We Actually Built</h2>
+            <p>Not a spreadsheet dressed as a game. A real game where strategy, timing, and skill determine winners. Where casual fans and serious traders coexist.</p>
+
+            <div class="feature-item">
+                <div class="feature-content">
+                    <h3>Live Market Updates</h3>
+                    <p>Player prices update in real-time during matches. A player performs well? Price goes up. Gets injured? Price crashes. Users see this happen instantly, creating urgency and opportunity.</p>
+                </div>
+                <div class="feature-visual">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                    </svg>
+                    <div class="feature-visual-label">Real-Time Market</div>
+                </div>
+            </div>
+
+            <div class="feature-item reverse">
+                <div class="feature-content">
+                    <h3>League Competition</h3>
+                    <p>Users create private leagues with friends. Compete on performance metrics. Leaderboards show who's best at spotting talent. Social pressure + competition = engagement.</p>
+                </div>
+                <div class="feature-visual">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    <div class="feature-visual-label">League System</div>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-content">
+                    <h3>Intuitive Trading</h3>
+                    <p>Trading doesn't feel like spreadsheets. Beautiful UI shows player cards, live stats, price trends. One tap to buy. One tap to sell. Complex mechanics feel effortless.</p>
+                </div>
+                <div class="feature-visual">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div class="feature-visual-label">Trading Interface</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="tech-section">
+            <h2>Tech Stack (Why Each Choice Mattered)</h2>
+
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-layer">Mobile</div>
+                    <div class="tech-name">React Native (Expo)</div>
+                    <div class="tech-reason">iOS and Android from one codebase. Fast iteration. React Native Reanimated for smooth animations that feel native.</div>
+                </div>
+
+                <div class="tech-item">
+                    <div class="tech-layer">State Management</div>
+                    <div class="tech-name">Redux</div>
+                    <div class="tech-reason">Complex game state (portfolios, prices, matches, trades). Redux keeps it predictable and testable.</div>
+                </div>
+
+                <div class="tech-item">
+                    <div class="tech-layer">Real-Time Data</div>
+                    <div class="tech-name">WebSocket</div>
+                    <div class="tech-reason">Price updates, match data, player stats all push to users instantly. WebSocket beats polling.</div>
+                </div>
+
+                <div class="tech-item">
+                    <div class="tech-layer">Backend</div>
+                    <div class="tech-name">Node.js + GraphQL</div>
+                    <div class="tech-reason">Flexible API for trading mechanics. Real-time subscriptions for price updates. GraphQL cuts data transfer.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Bottom Section -->
+        <section class="results-bottom">
+            <div class="results-stats">
+                <div class="stat-item">
+                    <div class="stat-number">Public</div>
+                    <div class="stat-label">Beta Live</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label">Downloads</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8K+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+            </div>
+            <div class="results-embed">
+                <div class="results-embed-label">
+                    Download on App Stores<br/>
+                    <small style="color: #999; font-size: 0.85rem;">(Replace with Google Play + Apple App Store embed badges)</small>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="content">
+        <section class="cta-section">
+            <h2>Building a game that actually engages users?</h2>
+            <p>We've designed for mobile, built real-time features, and scaled to thousands of concurrent users. Let's talk about what you're building.</p>
+            <div class="cta-buttons">
+                <a href="mailto:hello@gati.io" class="btn btn-light">Schedule a Consultation</a>
+                <a href="#" class="btn btn-outline">See Other Work</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>GATI — Engineering Meets Art</strong></p>
+        <p>Let's build something meaningful together.</p>
+    </footer>
+</body>
+</html>

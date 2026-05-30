@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPTV Case Study - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ffffff;
+            --secondary: #f8f8f8;
+            --accent: #1d4ed8;
+            --accent-dark: #1e40af;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --border: #e5e5e5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--primary);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--accent-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(29, 78, 216, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        /* Metadata */
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-top: 5rem;
+            padding-top: 4rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .meta-item {
+            text-align: left;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .meta-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        /* Section Pattern: Text + Image */
+        .section-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 8rem;
+        }
+
+        .section-block.reverse {
+            direction: rtl;
+        }
+
+        .section-block.reverse > * {
+            direction: ltr;
+        }
+
+        .section-text {
+            max-width: 500px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-text p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .section-text h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-text ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-text li {
+            margin-bottom: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Screenshot Placeholder */
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, var(--secondary) 0%, rgba(29, 78, 216, 0.05) 100%);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            aspect-ratio: 4/3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .screenshot-placeholder:hover {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, var(--secondary) 0%, rgba(29, 78, 216, 0.1) 100%);
+        }
+
+        .screenshot-placeholder svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 1.5rem;
+            opacity: 0.4;
+            color: var(--accent);
+        }
+
+        .screenshot-label {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .screenshot-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* What We Built - Inline Layout */
+        .features-section {
+            margin-bottom: 8rem;
+        }
+
+        .features-section h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .features-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .features-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+        .feature-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .feature-item.reverse {
+            direction: rtl;
+        }
+
+        .feature-item.reverse > * {
+            direction: ltr;
+        }
+
+        .feature-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-content p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        .feature-visual {
+            background: linear-gradient(135deg, var(--secondary) 0%, rgba(29, 78, 216, 0.05) 100%);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            aspect-ratio: 4/3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-secondary);
+        }
+
+        .feature-visual svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+            color: var(--accent);
+        }
+
+        .feature-visual-label {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        /* Tech Stack */
+        .tech-section {
+            margin-top: 4rem;
+        }
+
+        .tech-section h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .tech-item {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .tech-layer {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .tech-reason {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Results - Bottom Section */
+        .results-bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 6rem;
+            padding-top: 4rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .results-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .results-embed {
+            background: var(--secondary);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .results-embed-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            padding: 5rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 6rem 0 0 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--accent);
+        }
+
+        .btn-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            padding: 4rem 2rem;
+            border-top: 2px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .section-block,
+            .feature-item,
+            .results-bottom {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .section-block.reverse,
+            .feature-item.reverse {
+                direction: ltr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .metadata-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .results-stats {
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">GATI</div>
+        <ul class="nav-links">
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Portfolio Case Study</span>
+            <h1>IPTV: Hotel Entertainment Reimagined</h1>
+            <p class="hero-subtitle">How we transformed a bloated, slow hotel IPTV app into a fast, reliable experience on 7-year-old hardware. From 15 seconds to 3 seconds startup. From 400MB to 180MB RAM.</p>
+            
+            <div class="metadata-grid">
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div class="meta-value">3 Months</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Deployment</div>
+                    <div class="meta-value">Beta Live</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Focus</div>
+                    <div class="meta-value">Optimization</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Impact</div>
+                    <div class="meta-value">5x Faster</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Section 1: Challenge -->
+        <section class="section-block">
+            <div class="section-text">
+                <h2 class="section-title">The Problem</h2>
+                <p>Every night, thousands of hotel guests turn on their in-room TV. They see a clunky app from 2015.</p>
+                <p>It takes 15 seconds to load. Menu navigation is slow. Videos stutter. Some features crash. Guests give up and switch to cable.</p>
+                <p>The app was bloated. 87MB. 400MB RAM. Built with old tooling on old devices. It was time to rebuild it right.</p>
+                
+                <h3>What We Had to Solve</h3>
+                <ul>
+                    <li>Make the app run on ancient Set-Top Boxes (512MB RAM)</li>
+                    <li>Reduce startup time from 15 seconds to under 3 seconds</li>
+                    <li>Cut app size while keeping all features</li>
+                    <li>Smooth video playback on constrained hardware</li>
+                </ul>
+            </div>
+
+            <div class="section-visual">
+                <div class="screenshot-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0m-9 5h.01M12 3v1m6.364 1.636l-.707.707M12 3v1m6.364 1.636l-.707.707" />
+                    </svg>
+                    <div class="screenshot-label">Old vs New Interface</div>
+                    <div class="screenshot-description">REPLACE: Before/after UI screenshots</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Investigation + Optimization -->
+        <section class="section-block reverse">
+            <div class="section-text">
+                <h2 class="section-title">The Diagnosis</h2>
+                <p>We didn't guess. We profiled everything.</p>
+                <p>Memory leaks. Inefficient image loading. Bloated video codec settings. Unnecessary UI renders. Each of these little problems added up to one slow app.</p>
+                <p>We mapped where every MB was going. Where every second was being wasted. Then we cut ruthlessly.</p>
+            </div>
+
+            <div class="section-visual">
+                <div class="screenshot-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    <div class="screenshot-label">Performance Metrics</div>
+                    <div class="screenshot-description">Before/after memory and startup times</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Optimization Strategy -->
+        <section class="section-block">
+            <div class="section-text">
+                <h2 class="section-title">The Optimization</h2>
+                <p>Video codec settings mattered most. We moved to FFMPEG H.264 baseline profile at 2Mbps. Dropped video quality minimally but crushed startup time.</p>
+                <p>Image loading was killing performance. We implemented LRU caching instead of loading everything into memory.</p>
+                <p>UI rendering was expensive. We switched to ExoPlayer for video playback (uses hardware decoder) and lazy-loaded screens.</p>
+                <p>The result: 87MB → 68MB app size. 15 second → 3 second startup. 400MB → 180MB RAM consumption.</p>
+            </div>
+
+            <div class="section-visual">
+                <div class="screenshot-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <div class="screenshot-label">Optimization Stack</div>
+                    <div class="screenshot-description">FFMPEG, ExoPlayer, LRU cache architecture</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Built Section -->
+        <section class="features-section">
+            <h2>What We Actually Built</h2>
+            <p>Not just a faster app. A premium guest experience. When guests turn on the TV now, the app is already there waiting.</p>
+
+            <div class="feature-item">
+                <div class="feature-content">
+                    <h3>Instant Startup</h3>
+                    <p>3 seconds instead of 15. Guests don't get frustrated. The app feels premium, responsive. They actually use it instead of defaulting to cable.</p>
+                </div>
+                <div class="feature-visual">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <div class="feature-visual-label">Lightning Fast</div>
+                </div>
+            </div>
+
+            <div class="feature-item reverse">
+                <div class="feature-content">
+                    <h3>Smooth Playback</h3>
+                    <p>Video streams without stutter. Buffering is invisible. Hardware video decoding means the CPU isn't maxed out. Guest experience is flawless.</p>
+                </div>
+                <div class="feature-visual">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    </svg>
+                    <div class="feature-visual-label">Zero Stutter</div>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-content">
+                    <h3>Works Everywhere</h3>
+                    <p>Runs on 7-year-old hardware. Runs on new hardware. Lightweight on memory-constrained devices. Hotels don't have to upgrade their Set-Top Boxes.</p>
+                </div>
+                <div class="feature-visual">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0m-9 5h.01" />
+                    </svg>
+                    <div class="feature-visual-label">Universal</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="tech-section">
+            <h2>Tech Stack (The Optimization Tools)</h2>
+
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-layer">Frontend</div>
+                    <div class="tech-name">Flutter</div>
+                    <div class="tech-reason">Cross-platform, lightweight, compiles to efficient native code. No bloat.</div>
+                </div>
+
+                <div class="tech-item">
+                    <div class="tech-layer">Video Encoding</div>
+                    <div class="tech-name">FFMPEG H.264</div>
+                    <div class="tech-reason">Baseline profile, 2Mbps. Maximum compression without visible quality loss.</div>
+                </div>
+
+                <div class="tech-item">
+                    <div class="tech-layer">Video Playback</div>
+                    <div class="tech-name">ExoPlayer</div>
+                    <div class="tech-reason">Hardware-accelerated decoding. Offloads work from CPU to dedicated video chip.</div>
+                </div>
+
+                <div class="tech-item">
+                    <div class="tech-layer">Backend</div>
+                    <div class="tech-name">Node.js</div>
+                    <div class="tech-reason">Lightweight server. Streams data efficiently. No unnecessary overhead.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Bottom Section -->
+        <section class="results-bottom">
+            <div class="results-stats">
+                <div class="stat-item">
+                    <div class="stat-number">5x</div>
+                    <div class="stat-label">Faster startup</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">55%</div>
+                    <div class="stat-label">Less memory</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">22%</div>
+                    <div class="stat-label">Smaller size</div>
+                </div>
+            </div>
+            <div class="results-embed">
+                <div class="results-embed-label">
+                    Deployed at Select Hotels<br/>
+                    <small style="color: #999; font-size: 0.85rem;">(Replace with deployment info or hotel partner logos)</small>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="content">
+        <section class="cta-section">
+            <h2>Got a slow app that needs optimization?</h2>
+            <p>We've profiled, optimized, and deployed on constrained hardware. We know how to make things fast. Let's talk about what you're building.</p>
+            <div class="cta-buttons">
+                <a href="mailto:hello@gati.io" class="btn btn-light">Schedule a Consultation</a>
+                <a href="#" class="btn btn-outline">See Other Work</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>GATI — Engineering Meets Art</strong></p>
+        <p>Let's build something meaningful together.</p>
+    </footer>
+</body>
+</html>
