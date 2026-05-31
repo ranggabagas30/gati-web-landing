@@ -319,7 +319,7 @@ export function PortfolioSection() {
     <section
       id="work"
       ref={sectionRef}
-      className="relative h-[620vh] md:h-[620vh] overflow-hidden bg-[#f9f9f9]"
+      className="relative h-[620vh] md:h-[620vh] overflow-hidden"
     >
       <div
         ref={pinnedContainerRef}
@@ -329,7 +329,7 @@ export function PortfolioSection() {
           ref={titleRef}
           className="absolute top-32 md:top-32 lg:top-32 left-0 right-0 z-10 text-center px-4 md:px-6 lg:px-[120px]"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl">Selected Works</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl text-white">Selected Works</h2>
         </div>
 
         <div
