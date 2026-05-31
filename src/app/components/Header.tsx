@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const SCROLLED_THRESHOLD = 80;
@@ -6,18 +6,20 @@ const SCROLLED_THRESHOLD = 80;
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const aboutSectionRef = useRef<HTMLElement | null>(null);
+  const headerSlidesSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    aboutSectionRef.current = document.getElementById('about-what-we-do') as HTMLElement | null;
+    headerSlidesSectionRef.current = document.getElementById('about') as HTMLElement | null;
 
     const handleScroll = () => {
-      if (aboutSectionRef.current) {
-        const rect = aboutSectionRef.current.getBoundingClientRect();
-        setIsScrolled(rect.top <= SCROLLED_THRESHOLD);
+      if (headerSlidesSectionRef.current) {
+        const rect = headerSlidesSectionRef.current.getBoundingClientRect();
+        // Turn header white only after the manifesto slide sequence has fully passed.
+        setIsScrolled(rect.bottom <= SCROLLED_THRESHOLD);
       }
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);

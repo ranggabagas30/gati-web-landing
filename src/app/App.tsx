@@ -25,9 +25,34 @@ export default function App() {
       const nextHashValue = window.location.hash;
       setHashValue(nextHashValue);
 
-      if (parseHashRoute(nextHashValue).type === 'portfolio-detail') {
+      const nextRoute = parseHashRoute(nextHashValue);
+
+      if (nextRoute.type === 'portfolio-detail') {
         window.scrollTo({ top: 0, behavior: 'auto' });
+        return;
       }
+
+      const pendingLandingSection = sessionStorage.getItem('gati:pendingLandingSection');
+      sessionStorage.removeItem('gati:canBackToLanding');
+
+      if (!pendingLandingSection) {
+        return;
+      }
+
+      sessionStorage.removeItem('gati:pendingLandingSection');
+
+      const targetHash = `#${pendingLandingSection}`;
+
+      if (nextHashValue !== targetHash) {
+        window.history.replaceState(null, '', `/${targetHash}`);
+      }
+
+      window.requestAnimationFrame(() => {
+        const targetSection = document.getElementById(pendingLandingSection);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     };
 
     window.addEventListener('hashchange', handleHashChange);

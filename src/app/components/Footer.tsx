@@ -38,8 +38,15 @@ export function Footer() {
   };
 
   return (
-    <footer id="contact" className="bg-[#f05123] text-white py-20 lg:py-32">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-6 lg:px-[120px]">
+    <footer id="contact" className="relative overflow-hidden bg-[#f05123] text-white pt-20 pb-[65px] lg:pt-32 lg:pb-[65px]">
+      <img
+        src="/images/logo/gati_logo_transparent_footer.png"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 bottom-0 z-0 h-auto w-[89.1vw] max-w-[1711px] -translate-x-1/2 select-none"
+      />
+
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-6 lg:px-[120px]">
         <div ref={ctaRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl mb-6">Let's make progress, responsibly.</h2>
           <p className="text-xl md:text-2xl opacity-90">

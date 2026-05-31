@@ -9,6 +9,7 @@ export type DetailVisual =
       label: string;
       src: string;
       alt: string;
+      singleColumnClassName?: string;
     }
   | {
       kind: 'image-row';
@@ -116,7 +117,7 @@ export const portfolioProjects: PortfolioProject[] = [
           visual: {
             kind: 'image',
             label: 'App Interface',
-            src: '/images/portfolio/cuanx_sanded.png',
+            src: '/images/portfolio/cuanx_phone.png',
             alt: 'CuanX Phone Mockup',
           },
         },
@@ -131,6 +132,7 @@ export const portfolioProjects: PortfolioProject[] = [
             label: 'Development Roadmap',
             src: '/images/portfolio/cuanx_jira.png',
             alt: 'Jira Roadmap',
+            singleColumnClassName: 'h-[538px]',
           },
           reverse: true,
         },
@@ -271,9 +273,10 @@ export const portfolioProjects: PortfolioProject[] = [
             'Engage users who expect a game, not a spreadsheet',
           ],
           visual: {
-            kind: 'placeholder',
+            kind: 'image',
             label: 'Game Interface',
-            description: 'REPLACE: Football Money App Screens',
+            src: '/images/portfolio/football_money_phone.png',
+            alt: 'Football Money mobile interface',
           },
         },
         {
