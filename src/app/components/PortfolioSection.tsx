@@ -42,6 +42,7 @@ const PortfolioCard = React.forwardRef<HTMLDivElement, PortfolioCardProps>(
       : 'bg-white/10 border-2 border-white/20 text-white hover:bg-white/20';
 
     const navigateToDetail = () => {
+      sessionStorage.setItem('gati:canBackToLanding', '1');
       window.location.hash = `#/portfolio/${project.slug}`;
     };
 
@@ -318,7 +319,7 @@ export function PortfolioSection() {
     <section
       id="work"
       ref={sectionRef}
-      className="relative h-[630vh] md:h-[600vh] bg-[#f9f9f9]"
+      className="relative h-[620vh] md:h-[620vh] overflow-hidden bg-[#f9f9f9]"
     >
       <div
         ref={pinnedContainerRef}
@@ -326,7 +327,7 @@ export function PortfolioSection() {
       >
         <div
           ref={titleRef}
-          className="absolute top-30 md:top-16 lg:top-40 left-0 right-0 text-center px-4 md:px-6 lg:px-[120px]"
+          className="absolute top-32 md:top-32 lg:top-32 left-0 right-0 z-10 text-center px-4 md:px-6 lg:px-[120px]"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl">Selected Works</h2>
         </div>
