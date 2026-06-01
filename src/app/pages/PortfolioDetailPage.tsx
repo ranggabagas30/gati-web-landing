@@ -2,7 +2,7 @@ import { type MouseEvent, useEffect, useMemo, useRef, useState } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { ChevronLeft } from 'lucide-react';
 import { getPortfolioProjectBySlug, type DetailVisual } from '@/app/portfolioData';
-import { Footer } from '@/app/components/Footer';
+import { FooterV2 } from '@/app/components/FooterV2';
 
 interface PortfolioDetailPageProps {
   slug: string;
@@ -633,7 +633,7 @@ export function PortfolioDetailPage({ slug }: PortfolioDetailPageProps) {
         )}
       </section>
 
-      <Footer />
+      <FooterV2 />
     </main>
   );
 }
