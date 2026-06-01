@@ -73,34 +73,36 @@ export function PricingSection() {
     <section className="py-20 lg:py-40">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
         <div ref={containerRef} className="mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl mb-6">Transparent pricing for real-world teams</h2>
-          <p className="text-lg text-[#6b6b6b] max-w-[800px]">
-            We understand that early-stage products come with real constraints — budget, time, and team size. 
-            That's why we don't force fixed packages that don't fit. Instead, we adapt scope and execution to match 
-            your current stage, while keeping quality and maintainability intact.
+          <h2 className="mb-6 text-center font-['Plus_Jakarta_Sans'] text-[48px] leading-[48px] tracking-[0px] font-medium text-white">
+            Transparent pricing for real-world teams
+          </h2>
+          <p className="mx-auto max-w-[800px] text-center font-['Plus_Jakarta_Sans'] text-[32px] leading-[28pt] tracking-[0px] font-normal text-black">
+            We don't force fixed packages that don't fit.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="mb-12 grid grid-cols-1 justify-items-center gap-x-6 gap-y-6 xl:grid-cols-3">
           {pricingOptions.map((option, index) => (
             <div
               key={index}
-              ref={(el) => (cardsRef.current[index] = el)}
-              className="p-6 border border-[#e9ebef] rounded-lg hover:border-[#f05123] hover:shadow-md transition-all duration-300"
+              ref={(el) => {
+                cardsRef.current[index] = el;
+              }}
+              className="w-full max-w-[304px] rounded-lg border border-white bg-white/45 px-[25px] pt-[27px] pb-[39px] backdrop-blur-sm hover:border-[#f05123] hover:shadow-md transition-all duration-300 md:h-[220px] md:w-[304px]"
             >
-              <h3 className="text-2xl mb-3">{option.title}</h3>
-              <div className="text-3xl text-[#f05123] mb-3">{option.price}</div>
-              <p className="text-[#6b6b6b]">{option.description}</p>
+              <h3 className="mb-[12px] font-['Inter'] text-[24px] leading-[32px] tracking-[0px] font-medium text-[#0A0A0A]">
+                {option.title}
+              </h3>
+              <div className="mb-[33px] font-['Inter'] text-[30px] leading-[36px] tracking-[0px] font-normal text-[#f05123]">
+                {option.price}
+              </div>
+              <p className="font-['Inter'] text-[16px] leading-[24px] tracking-[0px] font-normal text-[#6B6B6B]">
+                {option.description}
+              </p>
             </div>
           ))}
         </div>
 
-        <div className="bg-[#f9f9f9] p-8 rounded-lg">
-          <p className="text-lg text-[#6b6b6b] text-center max-w-[800px] mx-auto">
-            If these ranges feel high for your current situation, talk to us anyway. 
-            We're happy to suggest phased approaches, reduced scopes, or alternative solutions that still move your product forward.
-          </p>
-        </div>
       </div>
     </section>
   );

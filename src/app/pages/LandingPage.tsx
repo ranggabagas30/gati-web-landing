@@ -5,13 +5,13 @@ import { TeamSection } from '@/app/components/TeamSection';
 import { ExpertiseSection } from '@/app/components/ExpertiseSection';
 import { PortfolioSection } from '@/app/components/PortfolioSection';
 import { PricingSection } from '@/app/components/PricingSection';
-import { Footer } from '@/app/components/Footer';
+import { FooterV2 } from '@/app/components/FooterV2';
 
 export function LandingPage() {
   const hideSelectedSections = true;
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(to_bottom,#000000_41%,#FFFFFF_77%)]">
+    <div className="min-h-screen bg-[linear-gradient(to_bottom,#000000_32%,#1F1F1F_58%,#B8B9BB_84%,#FFFFFF_100%)]">
       <Header />
       <ManifestoSection />
       {!hideSelectedSections && <ServicesSection />}
@@ -19,7 +19,7 @@ export function LandingPage() {
       <ExpertiseSection />
       <PortfolioSection />
       <PricingSection />
-      <Footer />
+      <FooterV2 />
     </div>
   );
 }
