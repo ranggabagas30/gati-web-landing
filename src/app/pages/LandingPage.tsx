@@ -1,9 +1,11 @@
 import { Nav } from '@/app/components/Nav';
+import { HeroSection } from '@/app/components/HeroSection';
 
 export function LandingPage() {
   return (
     <div className="min-h-screen bg-[var(--gati-dark)]">
       <Nav />
+      <HeroSection />
       <div className="h-[200vh]" />
     </div>
   );
