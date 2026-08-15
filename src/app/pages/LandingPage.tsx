@@ -1,6 +1,7 @@
 import { Nav } from '@/app/components/Nav';
 import { HeroSection } from '@/app/components/HeroSection';
 import { ExpertiseSection } from '@/app/components/ExpertiseSection';
+import { ProjectsSection } from '@/app/components/ProjectsSection';
 
 export function LandingPage() {
   return (
@@ -8,6 +9,7 @@ export function LandingPage() {
       <Nav />
       <HeroSection />
       <ExpertiseSection />
+      <ProjectsSection onViewCaseStudy={(slug) => console.log('open', slug)} />
     </div>
   );
 }
