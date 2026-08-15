@@ -1,153 +1,151 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { usePriceScramble } from '@/app/hooks/usePriceScramble';
 
 gsap.registerPlugin(ScrollTrigger);
 
 type ExpertiseCard = {
+  number: string;
   title: string;
-  subtitleLineOne: string;
-  subtitleLineTwo: string;
-  image: string;
-  gradient: string;
-  fullWidth?: boolean;
+  price: number;
+  description: string;
+  hoverImage: string;
 };
 
-const expertiseCards: ExpertiseCard[] = [
+const EXPERTISE_CARDS: ExpertiseCard[] = [
   {
+    number: '01',
     title: 'Super-App Platforms',
-    subtitleLineOne: 'Development, Scalable,',
-    subtitleLineTwo: 'Multi-feature platforms',
-    image: '/images/expertise/superapp_expertise.png',
-    gradient: 'linear-gradient(90deg, #FFFFFF 0%, #FFEAC8 100%)',
+    price: 10000,
+    description:
+      'One app to replace forty. Built for scale from day one, designed for people who don’t have time to wait.',
+    hoverImage: '/images/expertise/superapp_hover.png',
   },
   {
-    title: 'Mobile Game Development',
-    subtitleLineOne: 'Development, Engaging,',
-    subtitleLineTwo: 'Immersive user experiences',
-    image: '/images/expertise/mobiledev_expertise.png',
-    gradient: 'linear-gradient(90deg, #F1EDF8 54%, #B697D7 100%)',
+    number: '02',
+    title: 'Complex Interactive Platforms',
+    price: 5000,
+    description: 'Real-time, high-stakes, deeply interactive. The kind of build most studios won’t touch. We start there.',
+    hoverImage: '/images/expertise/interactive_hover.png',
   },
   {
-    title: 'Landing Websites',
-    subtitleLineOne: 'Designed for clarity,',
-    subtitleLineTwo: 'Trust & Results',
-    image: '/images/expertise/weblanding_expertise.png',
-    gradient: 'linear-gradient(90deg, #EDF3F0 0%, #A3D8BA 100%)',
-    fullWidth: true,
+    number: '03',
+    title: 'Brand Websites',
+    price: 2000,
+    description: 'First impressions that hold up. Fast, precise, and built to say exactly what you mean — nothing more.',
+    hoverImage: '/images/expertise/brand_hover.png',
   },
 ];
 
+function ExpertiseCardItem({ card }: { card: ExpertiseCard }) {
+  const { displayValue, onMouseEnter, onMouseLeave } = usePriceScramble(card.price);
+
+  return (
+    <article
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className="group relative flex min-h-[380px] flex-col justify-between overflow-hidden border-[0.5px] border-white/10 bg-[var(--gati-dark-surface)] p-9 pb-9 transition-colors duration-300 hover:border-[#f05123]/35"
+      style={{
+        backgroundImage:
+          'linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px)',
+        backgroundSize: '22px 22px',
+      }}
+    >
+      <div className="flex flex-col gap-5">
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] tracking-[0.1em] text-[#f05123]">{card.number}</span>
+          <div className="text-right">
+            <span className="mb-1 block text-[8px] font-bold uppercase tracking-[0.14em] text-white/40 transition-colors group-hover:text-white/40">
+              typically starts at
+            </span>
+            <span className="block text-sm font-extrabold tracking-tight text-white/15 transition-colors group-hover:text-[#f05123] tabular-nums">
+              {displayValue}
+            </span>
+          </div>
+        </div>
+
+        <h3 className="text-[clamp(20px,1.8vw,26px)] font-bold leading-[1.15] tracking-tight text-white">
+          {card.title}
+        </h3>
+        <p className="mt-1 text-[13px] font-light leading-relaxed text-white/40">{card.description}</p>
+      </div>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex h-[80%] translate-y-full flex-col justify-end overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 [@media(hover:none)]:translate-y-[65%] [@media(hover:none)]:opacity-70">
+        <div
+          className="absolute inset-0 bg-cover bg-top opacity-45 transition-opacity duration-400 group-hover:opacity-55"
+          style={{ backgroundImage: `url('${card.hoverImage}')` }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(21,21,19,1) 0%, rgba(21,21,19,0.88) 38%, rgba(21,21,19,0.35) 70%, transparent 100%)',
+          }}
+        />
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-[1.5px] origin-left scale-x-0 bg-[#f05123] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-x-100" />
+    </article>
+  );
+}
+
 export function ExpertiseSection() {
-  const titleRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const triggersRef = useRef<ScrollTrigger[]>([]);
 
   useEffect(() => {
-    triggersRef.current = [];
+    const triggers: ScrollTrigger[] = [];
 
-    if (titleRef.current) {
-      const titleTween = gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: 'top 80%',
-          },
-        }
+    if (headerRef.current) {
+      const tween = gsap.fromTo(
+        headerRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out', scrollTrigger: { trigger: headerRef.current, start: 'top 85%' } }
       );
-
-      if (titleTween.scrollTrigger) {
-        triggersRef.current.push(titleTween.scrollTrigger);
-      }
+      if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
     }
 
     cardsRef.current.forEach((card, index) => {
       if (!card) return;
-
-      const cardTween = gsap.fromTo(
+      const tween = gsap.fromTo(
         card,
-        { opacity: 0, y: 10 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.5,
-          delay: index * 0.08,
+          duration: 0.65,
+          delay: index * 0.12,
           ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-          },
+          scrollTrigger: { trigger: card, start: 'top 85%' },
         }
       );
-
-      if (cardTween.scrollTrigger) {
-        triggersRef.current.push(cardTween.scrollTrigger);
-      }
+      if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
     });
 
-    return () => {
-      triggersRef.current.forEach((trigger) => trigger.kill());
-      triggersRef.current = [];
-    };
+    return () => triggers.forEach((t) => t.kill());
   }, []);
 
   return (
-    <section id="expertise" className="py-16 md:py-20 lg:py-24">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[120px]">
-        <div ref={titleRef} className="text-center mb-10 md:mb-12 lg:mb-14">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#f05123]">Our Expertise</h2>
-        </div>
+    <section id="expertise" className="bg-[var(--gati-dark)] px-6 py-24 md:px-16">
+      <div
+        ref={headerRef}
+        className="mb-14 flex flex-col justify-between gap-4 md:flex-row md:items-start"
+      >
+        <span className="text-[13px] uppercase tracking-[0.18em] text-white/55">Expertise</span>
+        <p className="max-w-[260px] text-[13px] font-light leading-relaxed text-white/35 md:text-right">
+          Our clients started with one.
+          <br />
+          Most came back with three.
+        </p>
+      </div>
 
-        <div className="mx-auto w-full max-w-[1172px] grid grid-cols-1 gap-4 sm:gap-5 min-[601px]:grid-cols-[700fr_452fr] min-[601px]:gap-5">
-          {expertiseCards.map((card, index) => (
-            <article
-              key={index}
-              ref={(el) => (cardsRef.current[index] = el)}
-              className={`relative overflow-hidden rounded-2xl md:rounded-[28px] shadow-[0_10px_28px_rgba(0,0,0,0.18)] [container-type:inline-size] ${card.fullWidth ? 'min-[601px]:col-span-2' : ''} ${
-                index === 0
-                  ? 'aspect-[700/555]'
-                  : index === 1
-                    ? 'aspect-[700/555] min-[601px]:aspect-[452/555]'
-                    : 'aspect-[1172/491]'
-              }`}
-              style={{ background: card.gradient }}
-            >
-              <img
-                src={card.image}
-                alt={card.title}
-                className="absolute inset-0 h-full w-full object-cover object-center"
-                loading="lazy"
-              />
-
-              <div className="absolute inset-0 p-5 md:p-7 lg:p-9 font-['Plus_Jakarta_Sans']">
-                <div className="relative h-full w-full">
-                  <div className={`${card.fullWidth ? 'max-w-[42%]' : 'max-w-[56%]'} space-y-2`}>
-                    <h3
-                      className={`text-[clamp(22px,7.5cqi,34px)] leading-[clamp(27px,9.2cqi,42px)] font-bold tracking-[-0.02em] text-black ${
-                        index === 2 ? 'max-[540px]:text-[clamp(18px,6.2cqi,28px)] max-[540px]:leading-[clamp(22px,7.6cqi,34px)]' : ''
-                      }`}
-                    >
-                      {card.title}
-                    </h3>
-                    <div className={index === 1 ? 'max-w-[92%]' : 'max-w-full'}>
-                      <p className="mt-7 text-[clamp(11px,3.3cqi,15px)] leading-[clamp(16px,5.3cqi,24px)] font-medium text-black/50">
-                        {card.subtitleLineOne}
-                        <br />
-                        {card.subtitleLineTwo}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 border-[0.5px] border-white/10 md:grid-cols-3">
+        {EXPERTISE_CARDS.map((card, index) => (
+          <div key={card.number} ref={(el) => (cardsRef.current[index] = el)}>
+            <ExpertiseCardItem card={card} />
+          </div>
+        ))}
       </div>
     </section>
   );
