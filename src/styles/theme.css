@@ -10,6 +10,11 @@
   --popover-foreground: oklch(0.145 0 0);
   --primary: #f05123;
   --secondary: #f68d6f;
+  --gati-dark: #0d0d0b;
+  --gati-dark-surface: #151513;
+  --gati-cream: #f5f3ef;
+  --gati-grid-line: rgba(255, 255, 255, 0.018);
+  --gati-grid-line-hover: rgba(255, 255, 255, 0.032);
   --black: #000000;
   --white: #ffffff;
   --text-primary: #0f0f0f;
