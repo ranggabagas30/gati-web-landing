@@ -31,18 +31,19 @@ export function Nav() {
 
   return (
     <>
-      {showWall && (
-        <button
-          type="button"
-          onClick={enter}
-          aria-label="Enter site"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--gati-cream)] transition-opacity duration-700"
-        >
-          <span className="animate-pulse text-[11px] font-light uppercase tracking-[0.14em] text-[#1a1a18] opacity-70">
-            Tap to enter
-          </span>
-        </button>
-      )}
+      <button
+        type="button"
+        onClick={enter}
+        aria-label="Enter site"
+        aria-hidden={!showWall}
+        tabIndex={showWall ? 0 : -1}
+        className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--gati-cream)] transition-opacity duration-700"
+        style={{ opacity: showWall ? 1 : 0, pointerEvents: showWall ? 'auto' : 'none' }}
+      >
+        <span className="animate-pulse text-[11px] font-light uppercase tracking-[0.14em] text-[#1a1a18] opacity-70">
+          Tap to enter
+        </span>
+      </button>
 
       <nav
         className="fixed left-0 right-0 top-0 z-20 flex h-16 items-center justify-center border-b border-white/10 bg-[var(--gati-dark)]/90 backdrop-blur transition-opacity duration-500"
