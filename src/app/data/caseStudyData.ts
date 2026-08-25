@@ -7,6 +7,7 @@ export interface CaseStudyFeature {
   name: string;
   desc: string;
   stat: string;
+  visual?: string;
 }
 
 export interface CaseStudyTech {
@@ -65,7 +66,7 @@ export interface BaseCaseStudy {
   tagline: string;
   heroImg: string;
   stats: CaseStudyStat[];
-  problem: { heading: string; body: string };
+  problem: { heading: string; body: string; img?: string };
   features: CaseStudyFeature[];
   tech: CaseStudyTech[];
   results: CaseStudyResult[];
@@ -73,16 +74,16 @@ export interface BaseCaseStudy {
 }
 
 export interface CuanXCaseStudyData extends BaseCaseStudy {
-  timeline: { body: string };
-  wireframes: { body: string };
+  timeline: { body: string; img?: string };
+  wireframes: { body: string; img?: string };
   location: { body: string; nodes: EcosystemNode[] };
-  cms: { body: string; adminLevels: AdminLevel[] };
+  cms: { body: string; adminLevels: AdminLevel[]; img?: string };
 }
 
 export interface FootballMoneyCaseStudyData extends BaseCaseStudy {
   market: { heading: string; stats: MarketStat[]; body: string };
   mechanics: { heading: string; body: string; rules: MechanicRule[] };
-  timeline: { body: string };
+  timeline: { body: string; img?: string };
   differentiators: Differentiator[];
 }
 

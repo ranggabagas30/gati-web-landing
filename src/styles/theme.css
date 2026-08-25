@@ -134,8 +134,9 @@
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    @apply text-foreground;
+    background: var(--gati-dark);
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   /**
@@ -188,4 +189,10 @@
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
   }
+}
+
+/* Hero CTA's scroll-pulse arrow — matches the draft's #scroll-pulse exactly. */
+@keyframes gati-scroll-pulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(7px); }
 }

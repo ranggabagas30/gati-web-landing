@@ -73,15 +73,8 @@ function ExpertiseCardItem({ card }: { card: ExpertiseCard }) {
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex h-[80%] translate-y-full flex-col justify-end overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 [@media(hover:none)]:translate-y-[65%] [@media(hover:none)]:opacity-70">
         <div
-          className="absolute inset-0 bg-cover bg-top opacity-45 transition-opacity duration-400 group-hover:opacity-55"
+          className="absolute inset-0 bg-cover bg-top"
           style={{ backgroundImage: `url('${card.hoverImage}')` }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(to top, rgba(21,21,19,1) 0%, rgba(21,21,19,0.88) 38%, rgba(21,21,19,0.35) 70%, transparent 100%)',
-          }}
         />
       </div>
 
@@ -91,46 +84,79 @@ function ExpertiseCardItem({ card }: { card: ExpertiseCard }) {
 }
 
 export function ExpertiseSection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const triggers: ScrollTrigger[] = [];
+    if (!sectionRef.current) return;
 
+    // Header + cards reveal as one timeline instead of four independently
+    // scroll-triggered tweens, so we have a single "the entrance is done" moment
+    // to gate on — same completion-based approach used for the hero.
+    const master = gsap.timeline({ paused: true });
     if (headerRef.current) {
-      const tween = gsap.fromTo(
+      master.fromTo(
         headerRef.current,
         { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out', scrollTrigger: { trigger: headerRef.current, start: 'top 85%' } }
+        { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out' },
+        0
       );
-      if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
     }
-
     cardsRef.current.forEach((card, index) => {
       if (!card) return;
-      const tween = gsap.fromTo(
+      master.fromTo(
         card,
         { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.65,
-          delay: index * 0.12,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: card, start: 'top 85%' },
-        }
+        { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out' },
+        index * 0.12
       );
-      if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
     });
 
-    return () => triggers.forEach((t) => t.kill());
+    let onWheel: ((e: WheelEvent) => void) | null = null;
+    let onTouchMove: ((e: TouchEvent) => void) | null = null;
+
+    const releaseGate = () => {
+      if (onWheel) window.removeEventListener('wheel', onWheel);
+      if (onTouchMove) window.removeEventListener('touchmove', onTouchMove);
+      onWheel = null;
+      onTouchMove = null;
+    };
+
+    // One-shot: the first time this section is scrolled into view (including the
+    // instant jump when the hero retires), play the reveal and block scrolling
+    // further past it until the reveal has actually finished — otherwise a fast
+    // scroll right off the hero can carry straight through this section unseen.
+    const entryTrigger = ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        master.eventCallback('onComplete', releaseGate);
+        master.play();
+
+        onWheel = (e) => {
+          if (e.deltaY > 0) e.preventDefault();
+        };
+        onTouchMove = (e) => e.preventDefault();
+        window.addEventListener('wheel', onWheel, { passive: false });
+        window.addEventListener('touchmove', onTouchMove, { passive: false });
+      },
+    });
+
+    return () => {
+      entryTrigger.kill();
+      master.kill();
+      releaseGate();
+    };
   }, []);
 
   return (
-    <section id="expertise" className="bg-[var(--gati-dark)] px-6 py-24 md:px-16">
+    <section ref={sectionRef} id="expertise" className="bg-[var(--gati-dark)] px-6 py-24 md:px-16">
       <div
         ref={headerRef}
         className="mb-14 flex flex-col justify-between gap-4 md:flex-row md:items-start"
+        style={{ opacity: 0, transform: 'translateY(40px)' }}
       >
         <span className="text-[13px] uppercase tracking-[0.18em] text-white/55">Expertise</span>
         <p className="max-w-[260px] text-[13px] font-light leading-relaxed text-white/35 md:text-right">
@@ -142,7 +168,11 @@ export function ExpertiseSection() {
 
       <div className="grid grid-cols-1 border-[0.5px] border-white/10 md:grid-cols-3">
         {EXPERTISE_CARDS.map((card, index) => (
-          <div key={card.number} ref={(el) => (cardsRef.current[index] = el)}>
+          <div
+            key={card.number}
+            ref={(el) => (cardsRef.current[index] = el)}
+            style={{ opacity: 0, transform: 'translateY(40px)' }}
+          >
             <ExpertiseCardItem card={card} />
           </div>
         ))}

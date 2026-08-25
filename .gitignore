@@ -26,3 +26,6 @@ dist-ssr
 # Wrangler
 .wrangler/
 .dev.vars
+
+# Playwright CLI session artifacts
+.playwright-cli/
